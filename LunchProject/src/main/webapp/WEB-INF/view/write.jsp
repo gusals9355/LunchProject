@@ -10,12 +10,24 @@
 </head>
 <body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965"></script>
+	
+	<%
+		
+		String id = ""
+	%>
+	
 	<div>
 		<div id="map" style="width:500px;height:400px;"></div>
 		<div class="home">
 			<button type="button" class="home btn btn-outline-warning" onclick="panTo()">Home</button>
-			<button type="button" class="write btn btn-outline-warning" onclick="location.href='/write'">글 등록</button>
 		</div>
+	</div>
+	<div>
+		<div><label>제목 : <input type="text" name="title" value=""></label></div>
+		<div><label>id : <input type="text" name="id" value=""> </label></div>
+		<div><label>pw : <input type="password" name="pw" value=""> </label></div>
+		
+		<input type="submit" value="등록">
 	</div>
 	<p id="result"> <!-- 위도 경도 정보 -->
 	
