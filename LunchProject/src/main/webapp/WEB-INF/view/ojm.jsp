@@ -15,6 +15,7 @@
 		<div class="home">
 			<button type="button" class="home btn btn-outline-warning" onclick="panTo()">Home</button>
 			<button type="button" class="write btn btn-outline-warning" onclick="location.href='/write'">글 등록</button>
+		
 		</div>
 	</div>
 	<p id="result"> <!-- 위도 경도 정보 -->
