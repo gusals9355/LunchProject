@@ -24,13 +24,7 @@ public class WriteServlet extends HttpServlet {
 		    InetAddress inetAddress=InetAddress.getLocalHost();
 		    ipAddress=inetAddress.getHostAddress();
 		}
-		System.out.println(ipAddress);
 		
-		try {
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 		request.setAttribute("ipAddress", ipAddress);
 		RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/write.jsp");
 		dis.forward(request, response);

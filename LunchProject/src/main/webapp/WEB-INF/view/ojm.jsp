@@ -9,7 +9,8 @@
 <title>abcd</title>
 </head>
 <body>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965"></script>
+<%@include file="../view2/nav.jsp" %>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965&libraries=services"></script>
 	<div>
 		<div id="map" style="width:500px;height:400px;"></div>
 		<div class="home">
