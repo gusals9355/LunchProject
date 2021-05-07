@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<link rel="stylesheet" href="http://localhost:8080/css/main.css">
+<link rel="stylesheet" href="http://localhost:8090/css/main.css">
 <title>회원가입 | 오늘 점심 뭐먹지?</title>
 </head>
 <body>
-<%@include file="../view2/nav.jsp" %>
+<jsp:include page="../view2/${str }" flush="true"/>
 	<div id="container">
 		<section class="content">
 			<header class="content-title">

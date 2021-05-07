@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.koreait.lunch.model.MemberBean;
 import com.koreait.lunch.model.MemberDAO;
@@ -15,6 +16,7 @@ import com.koreait.lunch.model.MemberDAO;
 @WebServlet("/join")
 public class joinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/join.jsp");
 		dis.forward(request, response);
 	}

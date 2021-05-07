@@ -10,19 +10,14 @@
 		</style>
 	</head>
 	<body>
-		<div class="container">
-								<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn btn-danger">
-							<input type="radio" name="jb-radio" id="jb-radio-1"> Radio Button 1
-						</label>
-						<label class="btn btn-danger">
-							<input type="radio" name="jb-radio" id="jb-radio-2"> Radio Button 2
-						</label>
-						<label class="btn btn-danger">
-							<input type="radio" name="jb-radio" id="jb-radio-3"> Radio Button 3
-						</label>
-					</div>
-		</div>
+		<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group me-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-outline-secondary">1</button>
+    <button type="button" class="btn btn-outline-secondary">2</button>
+    <button type="button" class="btn btn-outline-secondary">3</button>
+    <button type="button" class="btn btn-outline-secondary">4</button>
+  </div>
+</div>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

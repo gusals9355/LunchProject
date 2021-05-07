@@ -24,10 +24,10 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
-	
 	public static void close(Connection con) {
 		if(con != null) {try {con.close();}catch (Exception e) {e.printStackTrace();}}
 	}
+	
 	
 	public static boolean insertMember(MemberBean bean) { //회원가입
 		getCon();
