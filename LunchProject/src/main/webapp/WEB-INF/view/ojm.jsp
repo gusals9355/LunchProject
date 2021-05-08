@@ -9,6 +9,7 @@
 <title>abcd</title>
 </head>
 <body>
+<%-- pull request 해주세요 --%>
 <jsp:include page="../view2/${str }" flush="true"/>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965&libraries=services"></script>
 	<div>
