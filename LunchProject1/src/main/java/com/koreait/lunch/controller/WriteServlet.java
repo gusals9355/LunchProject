@@ -40,6 +40,7 @@ public class WriteServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String 
 		
 		String savePath = "C:\\Users\\Administrator\\Downloads\\LunchProject-main\\LunchProject-main\\LunchProject\\src\\main\\webapp\\upload";
 		int sizeLimit = 1024*1024*15;
@@ -47,7 +48,6 @@ public class WriteServlet extends HttpServlet {
 		BoardBean bean = new BoardBean();
 		String context = request.getContextPath();
 		MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
-		try {
 		int no = Integer.parseInt(multi.getParameter("no")); 
 		Enumeration fileNames= multi.getFileNames(); //파일 이름 반환
 		int insert = 0;
@@ -87,20 +87,20 @@ public class WriteServlet extends HttpServlet {
                 }
             }
         }
-//        if(save){ //파일 저장 성공시
-//        	bean.setNo(no);
-////            bean.setMem_num(Integer.parseInt(multi.getParameter("mem_num")));
-//        	bean.setTitle(newFileName)
-//            bean.setTitle(multi.getParameter("title"));
-//            bean.setContent(multi.getParameter("content"));
-//            bean.setPasswd(multi.getParameter("passwd"));
-//            bean.setFileName(fileName);
-//            bean.setAddress(savePath+"/"+newFileName);
-//            insert = dao.insertBoard(board);
-//        }
+        if(save){ //파일 저장 성공시
+        	bean.setNo(no);
+//            bean.setMem_num(Integer.parseInt(multi.getParameter("mem_num")));
+        	bean.setTitle(newFileName)
+            bean.setTitle(multi.getParameter("title"));
+            bean.setContent(multi.getParameter("content"));
+            bean.setPasswd(multi.getParameter("passwd"));
+            bean.setFileName(fileName);
+            bean.setAddress(savePath+"/"+newFileName);
+            insert = dao.insertBoard(board);
+        }
         if (save && insert > 0) { //DB insert까지 성공시
             System.out.println("저장 성공");
-//            response.sendRedirect(context + "/boardDetail.do?num="+num);
+            response.sendRedirect(context + "/boardDetail.do?num="+num);
         } else {
             System.out.println("저장 실패");
             response.sendRedirect(context + "/boardAddForm.do");
