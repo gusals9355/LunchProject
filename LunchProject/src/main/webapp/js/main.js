@@ -122,6 +122,14 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
+            // 마커 클릭시 해당하는 좌표를 lng와 lat에 지정
+            kakao.maps.event.addListener(marker,'click',function(){
+				var latlng = marker.getPosition();
+				var inputLng = document.getElementById("lng");
+				var inputLat = document.getElementById("lat");
+				inputLng.value = latlng.getLng();
+				inputLat.value = latlng.getLat();
+			});
         })(marker, places[i].place_name);
 
         fragment.appendChild(itemEl);
@@ -239,3 +247,7 @@ function setLevel() { //지도 레벨 설정
 function goMyPage(){
 	location.href="/mypage";
 } 
+
+function setStar(i) {
+    document.getElementById("star").value = i;
+}
