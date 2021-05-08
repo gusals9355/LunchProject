@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/css/boot/bootstrap.css">
+<link rel="stylesheet" href="http://localhost:8080/css/main.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <title>abcd</title>
 </head>
 <body>
-<%-- pull request 해주세요 --%>
 <jsp:include page="../view2/${str }" flush="true"/>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965&libraries=services"></script>
 	<div>
@@ -21,43 +21,7 @@
 		</div>
 	</div>
 	<p id="result"> <!-- 위도 경도 정보 -->
-	
-	<script>
-	var mapContainer = document.getElementById('map'), 
-	    mapOption = { 
-	        center: new kakao.maps.LatLng(35.86611866674244, 128.5938331533704), 
-	        level: 3 
-	    };
-	
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	var mapTypeControl = new kakao.maps.MapTypeControl(); //일반, 스카이뷰 전환
-	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-	
-	var zoomControl = new kakao.maps.ZoomControl(); 
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-	
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-		
-	    // 클릭한 위도, 경도 정보를 가져옵니다 
-	    var latlng = mouseEvent.latLng;
-	    
-	    var message = '위도 ' + latlng.getLat() ;
-	    message += '경도 ' + latlng.getLng() ;
-	    
-	    var resultDiv = document.getElementById('result'); 
-	    resultDiv.innerHTML = message;
-	    
-	});
-	
-	function panTo(){
-		var moveLatLon = new kakao.maps.LatLng(35.86611866674244, 128.5938331533704);
-		
-		map.panTo(moveLatLon);
-	}
-	
-	</script>
-	
-	<script src="/js/boot/bootstrap.js"></script>
+<script src="http://localhost:8080/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>

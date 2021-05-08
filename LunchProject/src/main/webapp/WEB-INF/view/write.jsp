@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" type="text/css" href="http://localhost:8090/css/boot/bootstrap.css"> -->
-<link rel="stylesheet" href="http://localhost:8090/css/main.css">
+<!-- <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/boot/bootstrap.css"> -->
+<link rel="stylesheet" href="http://localhost:8080/css/main.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <title>abcd</title>
 </head>
@@ -54,6 +54,7 @@
 		</div>
 	</div>
 	<div>
+		
 		<div><label>id : <input type="text" name="id" value="${anonymous }"> </label></div>
 		<div><label>pw : <input type="password" name="pw"> </label></div>
 		<div><label>제목 : <input type="text" name="title"></label></div>
@@ -66,7 +67,7 @@
 	</div>
 	<p id="result"></p> <!-- 위도 경도 정보 -->
 	
-<script src="http://localhost:8090/js/main.js"></script>
+<script src="http://localhost:8080/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>
