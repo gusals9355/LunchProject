@@ -61,7 +61,7 @@ public class WriteServlet extends HttpServlet {
 		int sizeLimit = 1024*1024*15; //파일크기
 		
 		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, "utf-8", new DefaultFileRenamePolicy() /*중복이름 변경*/); 
-		Enumeration<String> files = multi.getFileNames(); // 폼에서 받아온 file 이름 반환
+		Enumeration files = multi.getFileNames(); // 폼에서 받아온 file 이름 반환
 			try {
 				//http://kaludin.egloos.com/v/2274255
 				id=multi.getParameter("id"); // 폼태그 enctype속성이 있으면 일반적인 방법으로 값을 받을수 없음 개씨발
@@ -74,13 +74,13 @@ public class WriteServlet extends HttpServlet {
 				mapY=multi.getParameter("mapY");
 				
 				List<String> list = new ArrayList<String>();
-				
 				while(files.hasMoreElements()) {
-					String fileInput = files.nextElement();
+					String fileInput = (String) files.nextElement();
 					picture = multi.getFilesystemName(fileInput); //사용자가 지정해서 서버 상에 실제로 업로드된 파일명을 반환함
 					System.out.println(picture);
 					list.add(picture);
 				}
+				
 				vo.setId(id);
 				vo.setPw(pw);
 				vo.setTitle(title);

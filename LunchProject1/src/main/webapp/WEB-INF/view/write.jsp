@@ -86,7 +86,7 @@
 		<div><label>카테고리 : <input type="text" name="category" maxlength="1000"></label></div>
 		<div><label>맵x : <input type="text" name="mapX" maxlength="1000"></label></div>
 		<div><label>맵y : <input type="text" name="mapY" maxlength="1000"></label></div>
-		<div><input type="file" name="file" value="파일찾기" accept=".jpg,.jpeg,.png,.gif,.bmp" multiple="multiple"></div>
+		<div><input type="file" name="file[]" value="파일찾기" accept=".jpg,.jpeg,.png" multiple="multiple"></div>
 		<!-- TODO: 첨부파일 (사진 cos이용) -->
 		
 		ip : ${ipAddress }
