@@ -42,6 +42,7 @@
 	    // 클릭한 위도, 경도 정보를 가져옵니다 
 	    var latlng = mouseEvent.latLng;
 	    
+
 	    var message = '위도 ' + latlng.getLat() ;
 	    message += '경도 ' + latlng.getLng() ;
 	    
@@ -59,5 +60,6 @@
 	</script>
 	
 	<script src="/js/boot/bootstrap.js"></script>
+	<%-- 이번엔 여기 바꿈 --%>
 </body>
 </html>
