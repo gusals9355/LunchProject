@@ -3,7 +3,9 @@ package com.koreait.lunch.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -14,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.koreait.lunch.model.BoardBean;
+import com.koreait.lunch.model.BoardVO;
+import com.koreait.lunch.model.ojmDAO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -40,73 +43,60 @@ public class WriteServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String 
+		String id = "";
+		String pw = "";
+		String title = "";
+		String content = "";
+		String star1 = "";
+		String category = "";
+		String mapX = "";
+		String mapY = "";
+		String picture = "";
+		BoardVO vo = new BoardVO();
 		
-		String savePath = "C:\\Users\\Administrator\\Downloads\\LunchProject-main\\LunchProject-main\\LunchProject\\src\\main\\webapp\\upload";
-		int sizeLimit = 1024*1024*15;
-		//dao
-		BoardBean bean = new BoardBean();
-		String context = request.getContextPath();
-		MultipartRequest multi = new MultipartRequest(request, savePath, sizeLimit, "utf-8", new DefaultFileRenamePolicy());
-		int no = Integer.parseInt(multi.getParameter("no")); 
-		Enumeration fileNames= multi.getFileNames(); //파일 이름 반환
-		int insert = 0;
-		boolean save= true; //파일 저장 성공
+		String savePath = request.getRealPath("upload"); //저장경로
+		String path = "C:\\Users\\user\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
+		System.out.println(path);
+		System.out.println(savePath);
+		int sizeLimit = 1024*1024*15; //파일크기
 		
-		String fileInput = ""; //폼으로 받아온 fileName
-        String fileName = ""; //저장된 파일 이름
-        String type = ""; //저장된 파일 종류
-        File fileObj = null; //저장된 파일 객체 java.io? apache ?
-        String originFileName = ""; //원본 파일 이름
-        String fileExtend = ""; //jpg,png,gif 등 확장자
-        String fileSize = ""; //저장된 파일 사이즈
-        String newFileName = "board_"+System.currentTimeMillis(); //저장된 파일을 바꿀 이름
-        System.out.println("newFileName:"+newFileName);
-        
-        while(fileNames.hasMoreElements()) {
-        	fileInput = (String)fileNames.nextElement();
-        	fileName = multi.getContentType(fileInput);
-        	
-        	if(fileName != null){
-                type = multi.getContentType(fileInput);
-                fileObj = multi.getFile(fileInput);
-                originFileName = multi.getOriginalFileName(fileInput);
-                fileExtend = fileName.substring(fileName.lastIndexOf(".")+1);//"file1.jpg"라면 jpg 반환
-                fileSize = String.valueOf(fileObj.length());//file도 결국 문자열이므로 length()로 반환
-                System.out.println("type:"+type+"||originFileName:"+originFileName+
-                        "||fileExtend:"+fileExtend+"||fileSize:"+fileSize);
-                
-                String[] splitType = type.split("/");
-                if(!splitType[0].equals("image")){
-                    save=false;
-                    fileObj.delete(); //저장된 파일 객체로 삭제
-                    break;
-                }else{//만약 이미지 파일이면 저장 파일의 이름 바꾼다.
-                    newFileName += "."+fileExtend;
-                    fileObj.renameTo(new File(savePath+"\\"+newFileName));
-                }
-            }
-        }
-        if(save){ //파일 저장 성공시
-        	bean.setNo(no);
-//            bean.setMem_num(Integer.parseInt(multi.getParameter("mem_num")));
-        	bean.setTitle(newFileName)
-            bean.setTitle(multi.getParameter("title"));
-            bean.setContent(multi.getParameter("content"));
-            bean.setPasswd(multi.getParameter("passwd"));
-            bean.setFileName(fileName);
-            bean.setAddress(savePath+"/"+newFileName);
-            insert = dao.insertBoard(board);
-        }
-        if (save && insert > 0) { //DB insert까지 성공시
-            System.out.println("저장 성공");
-            response.sendRedirect(context + "/boardDetail.do?num="+num);
-        } else {
-            System.out.println("저장 실패");
-            response.sendRedirect(context + "/boardAddForm.do");
-        }
-        }catch(Exception e){e.printStackTrace();}
-
+		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, "utf-8", new DefaultFileRenamePolicy() /*중복이름 변경*/); 
+		Enumeration<String> files = multi.getFileNames(); // 폼에서 받아온 file 이름 반환
+			try {
+				//http://kaludin.egloos.com/v/2274255
+				id=multi.getParameter("id"); // 폼태그 enctype속성이 있으면 일반적인 방법으로 값을 받을수 없음 개씨발
+				pw=multi.getParameter("pw");
+				title=multi.getParameter("title");
+				content=multi.getParameter("content");
+				star1=multi.getParameter("star1");
+				category=multi.getParameter("category");
+				mapX=multi.getParameter("mapX");
+				mapY=multi.getParameter("mapY");
+				
+				List<String> list = new ArrayList<String>();
+				
+				while(files.hasMoreElements()) {
+					String fileInput = files.nextElement();
+					picture = multi.getFilesystemName(fileInput); //사용자가 지정해서 서버 상에 실제로 업로드된 파일명을 반환함
+					System.out.println(picture);
+					list.add(picture);
+				}
+				vo.setId(id);
+				vo.setPw(pw);
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setStar(Integer.parseInt(star1));
+				vo.setCategory(category);
+				vo.setMapX(Double.parseDouble(mapX));
+				vo.setMapY(Double.parseDouble(mapY));
+				vo.setPicture(list);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("업로드 실패");
+			}
+		
+		ojmDAO.insertBoard(vo);
+		response.sendRedirect("/ojm");
 	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
 			
 	<div class="map_wrap">
 	    <div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
-	
+		<p id="inputLng"></p> <!-- 위도 경도 정보 -->
 	    <div id="menu_wrap" class="bg_white">
 	        <div class="option">
 	            <div>
@@ -54,18 +55,44 @@
 	</div>
 	<div>
 		<form action="/write" method="post" enctype="multipart/form-data">
+		<!-- 
+			<div class="star">
+				<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					평점
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="foodType">
+				<c:forEach var="i" begin="1" end="5">
+					<li><button class="dropdown-item" onclick="setStar(${i})">
+						<%-- i개만큼 꽉찬 별 찍기 --%>
+						<c:forEach var="j" begin="1" end="${i}"> 
+							<i class="bi bi-star-fill"></i>
+						</c:forEach>
+						<%-- 5-i개만큼 빈별 찍기 --%>
+						<c:forEach var="j" begin="2" end="5">
+							<i class="bi bi-star"></i>
+						</c:forEach>
+						</button>
+				</c:forEach>
+	
+				</ul>
+				<input type="hidden" value="5" id="star">
+			</div>
+		 -->
 		<div><label>id : <input type="text" name="id" value="${anonymous }"> </label></div>
 		<div><label>pw : <input type="password" name="pw"> </label></div>
 		<div><label>제목 : <input type="text" name="title" maxlength="30"></label></div>
 		<div><label>후기 : <input type="text" name="content" maxlength="1000"></label></div>
-		<div><label>첨부파일 : <input type="file" name="file"></label></div>
+		<div>평점 : <input type="text" name="star1" value="1"></div>
+		<div><label>카테고리 : <input type="text" name="category" maxlength="1000"></label></div>
+		<div><label>맵x : <input type="text" name="mapX" maxlength="1000"></label></div>
+		<div><label>맵y : <input type="text" name="mapY" maxlength="1000"></label></div>
+		<div><input type="file" name="file" value="파일찾기" accept=".jpg,.jpeg,.png,.gif,.bmp" multiple="multiple"></div>
 		<!-- TODO: 첨부파일 (사진 cos이용) -->
 		
 		ip : ${ipAddress }
-		<input class="sub" type="submit" value="등록">
+		<input type="submit" value="등록">
 		</form>
 	</div>
-	<p id="result"></p> <!-- 위도 경도 정보 -->
 	
 <script src="/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

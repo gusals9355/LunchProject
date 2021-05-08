@@ -1,6 +1,6 @@
 package com.koreait.lunch.model;
 
-public class MemberBean {
+public class MemberVO {
 	private String name;
 	private String email;
 	private String gender;

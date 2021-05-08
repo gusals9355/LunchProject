@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.koreait.lunch.model.MemberBean;
-import com.koreait.lunch.model.MemberDAO;
+import com.koreait.lunch.model.MemberVO;
+import com.koreait.lunch.model.ojmDAO;
 
 @WebServlet("/login")
 public class loginServlet extends HttpServlet {
@@ -30,11 +30,11 @@ public class loginServlet extends HttpServlet {
 		session.setAttribute("str", str);
 		String msg = "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.";
 		
-		MemberBean bean = new MemberBean();
+		MemberVO bean = new MemberVO();
 		bean.setId(id);
 		bean.setPw(pw);
 		
-		if(MemberDAO.tryLogin(bean)) { //로그인에 성공
+		if(ojmDAO.tryLogin(bean)) { //로그인에 성공
 			str = "nav2.jsp";
 			session.setAttribute("str", str);
 			session.setAttribute("userID", bean.getId());

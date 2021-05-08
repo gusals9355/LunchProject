@@ -27,8 +27,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     // 클릭한 위도, 경도 정보를 가져옵니다 
     var latlng = mouseEvent.latLng;
 
-	
-	
     var message = '위도 ' + latlng.getLat() ;
     message += '경도 ' + latlng.getLng() ;
 
@@ -124,6 +122,16 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
+
+            // 마커 클릭시 해당하는 좌표를 lng와 lat에 지정
+            kakao.maps.event.addListener(marker,'click',function(){
+				var latlng = marker.getPosition();
+				var inputLng = document.getElementById("lng");
+				var inputLat = document.getElementById("lat");
+				inputLng.value = latlng.getLng();
+				inputLat.value = latlng.getLat();
+			});
+			
         })(marker, places[i].place_name);
 
         fragment.appendChild(itemEl);
@@ -240,4 +248,8 @@ function setLevel() { //지도 레벨 설정
 }    
 function goMyPage(){
 	location.href="/mypage";
+} 
+
+function setStar(i) {
+    document.getElementById("star").value = i;
 } 

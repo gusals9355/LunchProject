@@ -8,7 +8,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class MemberDAO {
+public class ojmDAO {
 	static Connection con;
 	static PreparedStatement pstmt;
 	static ResultSet rs;
@@ -29,7 +29,7 @@ public class MemberDAO {
 	}
 	
 	
-	public static boolean insertMember(MemberBean bean) { //회원가입
+	public static boolean insertMember(MemberVO bean) { //회원가입
 		getCon();
 		boolean verify = true;
 		
@@ -52,7 +52,39 @@ public class MemberDAO {
 		return verify;
 	}
 	
-	public static boolean tryLogin(MemberBean bean) {
+	public static void insertBoard(BoardVO vo) {
+		getCon();
+		
+		String pictureList = "";
+		for (String i : vo.getPicture()) {
+			pictureList+=i+"," ;
+		}
+		
+		String sql = "insert into board(title, content, id, pw, picture, star, category, mapX, mapY) "
+				+ "values(?,?,?,?,?,?,?,?,?)";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getId());
+			pstmt.setString(4, vo.getPw());
+			pstmt.setString(5, pictureList);
+			pstmt.setInt(6, vo.getStar());
+			pstmt.setString(7, vo.getCategory());
+			pstmt.setDouble(8, vo.getMapX());
+			pstmt.setDouble(9, vo.getMapY());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con);
+		}
+		
+		
+		
+	}
+	
+	public static boolean tryLogin(MemberVO bean) {
 		getCon();
 		boolean verify = false;
 		
@@ -71,6 +103,8 @@ public class MemberDAO {
 		}
 		return verify;
 	}
+	
+	
 	
 	
 	

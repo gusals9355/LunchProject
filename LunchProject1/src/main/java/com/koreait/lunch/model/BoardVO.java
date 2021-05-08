@@ -1,6 +1,8 @@
 package com.koreait.lunch.model;
 
-public class BoardBean {
+import java.util.List;
+
+public class BoardVO {
 	private int no;
 	private String title;
 	private String content;
@@ -10,10 +12,16 @@ public class BoardBean {
 	private int readCount;
 	private String reg_dt;
 	private int star;
-	private String picture;
+	private List<String> picture;
 	private double mapX;
 	private double mapY;
 	
+	public List<String> getPicture() {
+		return picture;
+	}
+	public void setPicture(List<String> picture) {
+		this.picture = picture;
+	}
 	public String getId() {
 		return id;
 	}
@@ -67,12 +75,6 @@ public class BoardBean {
 	}
 	public void setStar(int star) {
 		this.star = star;
-	}
-	public String getPicture() {
-		return picture;
-	}
-	public void setPicture(String picture) {
-		this.picture = picture;
 	}
 	public double getMapX() {
 		return mapX;

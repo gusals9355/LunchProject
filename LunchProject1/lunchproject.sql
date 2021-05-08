@@ -14,10 +14,10 @@ create table board(
 	id varchar(20) not null,
 	pw varchar(20),
 	readcount int default 0,
-	picture varchar(100),
-	reg_dt datetime dafualt now(),
+	picture varchar(1000),
+	reg_dt datetime default now(),
 	star int(1) not null,
 	category varchar(4) not null,
-	mapX double(3,16) not null,
-	mapy double(4,16) not null
-)
+	mapX decimal(20,16) not null,
+	mapy double(20,16) not null
+);
