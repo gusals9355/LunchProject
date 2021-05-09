@@ -56,11 +56,11 @@ public class ojmDAO {
 		getCon();
 		
 		String pictureList = "";
-		for (String i : vo.getPicture()) {
-			pictureList+=i+"," ;
+		for (String i : vo.getPicture()) { //다중 파일이 업로드될때 구분자를 주기 위한 문장
+			pictureList+=i;
 		}
 		
-		String sql = "insert into board(title, content, id, pw, picture, star, category, mapX, mapY) "
+		String sql = "insert into board(title, content, id, pw, picture, star, category, mapX, mapY)"
 				+ "values(?,?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = con.prepareStatement(sql);
