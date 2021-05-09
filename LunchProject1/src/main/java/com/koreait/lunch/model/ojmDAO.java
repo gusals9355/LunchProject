@@ -82,6 +82,7 @@ public class ojmDAO {
 		
 		
 		
+		
 	}
 	
 	public static boolean tryLogin(MemberVO bean) {
