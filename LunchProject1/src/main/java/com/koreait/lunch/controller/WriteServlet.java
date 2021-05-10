@@ -25,9 +25,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class WriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		String[] typelist = {"한식","양식","일식","중식","분식","카페","기타"};
 		Random rd = new Random();
 		String anonymous = rd.ints(48, 123).filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(10).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
 		
+		request.setAttribute("typelist",typelist);
 		request.setAttribute("anonymous", anonymous);
 		        
 		String ipAddress=request.getRemoteAddr();
