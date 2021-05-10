@@ -250,3 +250,7 @@ function setLevel() { //지도 레벨 설정
 function setStar(i) {
     document.getElementById("star").value = i;
 } 
+
+function setType(type){
+    document.getElementById("foodType").value = type;
+}
