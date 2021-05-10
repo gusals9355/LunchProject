@@ -11,7 +11,6 @@
 <body>
 <jsp:include page="../view2/${str }" flush="false"/>
 	<div id="container">
-	<!-- commit -->
 		<section class="content">
 			<header class="content-title">
 				<h1>회원가입</h1>

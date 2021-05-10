@@ -25,7 +25,7 @@
 			    <button type="button" class="btn btn-outline-secondary" onclick="goMyPage()">내정보</button>
 			    <button type="button" class="btn btn-outline-secondary">포인트</button>
 	  		</div>
-	      <form class="d-flex" action="/logout">
+	      <form class="d-flex" action="/logout" method="post">
 	        <button class="btn btn-outline-success" type="submit">로그아웃</button>
 	      </form>
 	    </div>

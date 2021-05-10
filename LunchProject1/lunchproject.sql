@@ -7,6 +7,12 @@ create table member(
 	reg_dt datetime default now()
 );
 
+create table point(
+	id varchar(20),
+	point int default 0,
+	foreign key(id) references member(id)
+);
+
 create table board(
 	no int auto_increment primary key,
 	title varchar(30) not null,
@@ -20,4 +26,13 @@ create table board(
 	category varchar(4) not null,
 	mapX decimal(20,16) not null,
 	mapy double(20,16) not null
+);
+
+create table log(
+	no int unsigned auto_increment primary key,
+	id varchar(20),
+	log varchar(10) not null check(log in ('로그인','로그아웃')),
+	reg_dt datetime default now(),
+	attendance boolean default 0,
+	foreign key(id) references member(id)
 );
