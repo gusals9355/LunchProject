@@ -117,5 +117,12 @@ public class ojmDAO {
 		}
 		
 	}
+	
+	public static void selectPoint(MemberVO vo) {
+		getCon();
+		
+		String sql = "select ";
+		
+	}
 
 }

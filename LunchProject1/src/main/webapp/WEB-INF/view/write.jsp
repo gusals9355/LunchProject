@@ -40,9 +40,13 @@
 					음식 종류
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="foodType">
-					<c:forEach var="type" items="${typelist}">
-						<li><button class="dropdown-item" type="button" onclick="setType(${type})">${type}</button></li>
-					</c:forEach>
+						<li><button class="dropdown-item" type="button">한식</button></li>
+						<li><button class="dropdown-item" type="button">양식</button></li>
+						<li><button class="dropdown-item" type="button">일식</button></li>
+						<li><button class="dropdown-item" type="button">중식</button></li>
+						<li><button class="dropdown-item" type="button">분식</button></li>
+						<li><button class="dropdown-item" type="button">카페</button></li>
+						<li><button class="dropdown-item" type="button">기타</button></li>
 					</ul>
 				</div>
 				<div class="col star-div dropdown"><!-- 평점 -->
@@ -63,15 +67,13 @@
 							</button></li>
 						</c:forEach>
 					</ul>
+					<input type="hidden" name="star" value="5" id="star">
 				</div>
 			</div>
 		</div>
 		<div class="col right_layout"> <!-- 오른쪽 레이아웃 (주 폼태그) -->
+			<!-- ★form태그 다시 설정해야함★ -->
 			<form action="/write" method="post" enctype="multipart/form-data"> <!-- get방식 전송불가 -->
-				<input type="hidden" name="lng" id="lng" value="">
-				<input type="hidden" name="lat" id="lat" value="">
-				<input type="hidden" name="star" id="star" value="5">
-				<input type="hidden" name="foodType" id="foodType" value="">
 				<div class="row"> <!-- id,pw -->
 					<div class="col">
 						<input type="text" name="id" value="${anonymous }" placeholder="아이디" maxlength="20" required>
