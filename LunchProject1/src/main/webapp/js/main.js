@@ -63,3 +63,6 @@ function goRanking(){
 function goRank(){
 	location.href="/rank";
 }
+function setType(type){
+    document.getElementById("foodType").value = type;
+} 
