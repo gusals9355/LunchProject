@@ -54,3 +54,12 @@ function validFileType(file) {
 	return fileTypes.includes(file.type);
 }
 
+function goMyPage(){
+	location.href="/mypage";
+}
+function goRanking(){
+	location.href="/ranking";
+}
+function goRank(){
+	location.href="/rank";
+}

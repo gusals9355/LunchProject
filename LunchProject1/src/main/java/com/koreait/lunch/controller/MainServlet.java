@@ -18,8 +18,7 @@ public class MainServlet extends HttpServlet {
 		if(session.getAttribute("str") == null) { //로그인이 되지않으면 nav이 보임
 			session.setAttribute("str", str);
 		}
-		RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/ojm.jsp");
-		dis.forward(request, response);
+		MyUtils.openJSP("ojm", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -18,8 +18,7 @@ public class loginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
-		dis.forward(request, response);
+		MyUtils.openJSP("login", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,6 +37,10 @@ public class loginServlet extends HttpServlet {
 			str = "nav2.jsp";
 			session.setAttribute("str", str);
 			session.setAttribute("userID", bean.getId());
+			//로그인 성공 시 포인트를 획득함
+			//로그인 포인트는 하루에 한번만 받을 수 있음
+			ojmDAO.upPoint(bean);
+			
 			response.sendRedirect("/ojm");
 		} else {					  //로그인 실패
 			request.setAttribute("msg", msg);

@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/mypage")
 public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/mypage.jsp");
-		dis.forward(request, response);
+		MyUtils.openJSP("mypage", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

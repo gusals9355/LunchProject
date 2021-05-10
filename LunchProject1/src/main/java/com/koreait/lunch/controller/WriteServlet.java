@@ -37,8 +37,7 @@ public class WriteServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("ipAddress", ipAddress);
-		RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/write.jsp");
-		dis.forward(request, response);
+		MyUtils.openJSP("write", request, response);
 	}
 
 	

@@ -20,7 +20,7 @@
 	      </ul>
 	  		<div class="btn-group" role="group" aria-label="First group">
 			    <button type="button" class="btn btn-outline-secondary">${userID }님</button>
-			    <button type="button" class="btn btn-outline-secondary">등급</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="goRank()">등급</button>
 			    <button type="button" class="btn btn-outline-secondary" onclick="goRanking()">랭킹</button>
 			    <button type="button" class="btn btn-outline-secondary" onclick="goMyPage()">내정보</button>
 			    <button type="button" class="btn btn-outline-secondary">포인트</button>

@@ -36,6 +36,9 @@
 ol {padding:0 !important;}
 a {text-decoration: none !important; color: black !important;}
 li {list-style-type: none;}
+
+.container {padding-top: 40px;}
+
 /*login */
 #container{margin: 0 auto; width:768px; display: flex; justify-content: center; padding-top: 50px; padding-bottom: 50px; border: 1px solid #eaeaea;}
 .input_row {width: 400px; height: 50px;}
@@ -54,7 +57,7 @@ li {list-style-type: none;}
 .input_row2 {width: 400px; margin-bottom: 20px;}
 
 /*mypage*/
-.mybox{border: 1px solid #eaeaea; display: flex; justify-content: center; align-items: center;}
+.mybox{border: 1px solid #eaeaea; display: flex; justify-content: center; align-items: center; padding: 7px;}
 
 /*write */
 .input-file-button {padding: 6px 25px; background-color: #FF6600; border-radius: 4px; color: white; cursor: pointer;}

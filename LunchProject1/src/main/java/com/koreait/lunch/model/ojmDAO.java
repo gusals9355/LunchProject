@@ -28,7 +28,6 @@ public class ojmDAO {
 		if(con != null) {try {con.close();}catch (Exception e) {e.printStackTrace();}}
 	}
 	
-	
 	public static boolean insertMember(MemberVO bean) { //회원가입
 		getCon();
 		boolean verify = true;
@@ -80,9 +79,6 @@ public class ojmDAO {
 			close(con);
 		}
 		
-		
-		
-		
 	}
 	
 	public static boolean tryLogin(MemberVO bean) {
@@ -105,8 +101,21 @@ public class ojmDAO {
 		return verify;
 	}
 	
-	
-	
-	
-	
+	public static void upPoint(MemberVO vo) {
+		getCon();
+		int point = 5; //로그인 포인트를 5로 설정함
+		String sql = "update point set point = point +"+point+" where id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getId());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con);
+		}
+		
+	}
+
 }

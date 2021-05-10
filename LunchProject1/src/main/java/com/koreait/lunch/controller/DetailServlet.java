@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/detail")
 public class DetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/view/detail.jsp");
-		dis.forward(request, response);
+		MyUtils.openJSP("detail", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
