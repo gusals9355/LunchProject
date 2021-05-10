@@ -1,1 +1,0 @@
-<Resource auth="Container" driverClassName="org.mariadb.jdbc.Driver" maxWait="5000" name="jdbc/pool" password="root" type="javax.sql.DataSource" url="jdbc:mariadb://localhost:3307/lunchproject" username="root"/>
