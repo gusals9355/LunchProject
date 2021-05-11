@@ -3,10 +3,11 @@ package com.koreait.lunch.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 public class ojmDAO {
@@ -29,7 +30,7 @@ public class ojmDAO {
 		if(con != null) {try {con.close();}catch (Exception e) {e.printStackTrace();}}
 	}
 	
-	public static boolean insertMember(MemberVO bean) { //회원가입
+	public static boolean insertMember(MemberVO bean) { //�쉶�썝媛��엯
 		getCon();
 		boolean verify = true;
 		
@@ -56,7 +57,7 @@ public class ojmDAO {
 		getCon();
 		
 		String pictureList = "";
-		for (String i : vo.getPicture()) { //다중 파일이 업로드될때 구분자를 주기 위한 문장
+		for (String i : vo.getPicture()) { //�떎以� �뙆�씪�씠 �뾽濡쒕뱶�맆�븣 援щ텇�옄瑜� 二쇨린 �쐞�븳 臾몄옣
 			pictureList+=i;
 		}
 		
@@ -104,7 +105,7 @@ public class ojmDAO {
 	
 	public static void upPoint(MemberVO vo) {
 		getCon();
-		int point = 5; //로그인 포인트를 5로 설정함
+		int point = 5; //濡쒓렇�씤 �룷�씤�듃瑜� 5濡� �꽕�젙�븿
 		String sql = "update point set point = point +"+point+" where id = ?";
 		
 		try {
@@ -119,7 +120,7 @@ public class ojmDAO {
 		
 	}
 	
-	public static void log(String id, String str) { //로그인 로그를 저장하는 메소드
+	public static void log(String id, String str) { //濡쒓렇�씤 濡쒓렇瑜� ���옣�븯�뒗 硫붿냼�뱶
 		getCon();
 		int attendance = 1;
 		String target="";
@@ -131,10 +132,10 @@ public class ojmDAO {
 			pstmt.setString(2, str);
 			pstmt.setInt(3, attendance);
 			pstmt.executeUpdate();
-			if(str.equals("로그인")) {
+			if(str.equals("濡쒓렇�씤")) {
 				int cnt = 0;
-				//출석체크하기 위해 현재 로그인 이전 날짜를 가져오기 위한 sql문
-				String sql2 = "select day(reg_dt) from log where id = ? and log='로그인' order by reg_dt desc";
+				//異쒖꽍泥댄겕�븯湲� �쐞�빐 �쁽�옱 濡쒓렇�씤 �씠�쟾 �궇吏쒕�� 媛��졇�삤湲� �쐞�븳 sql臾�
+				String sql2 = "select day(reg_dt) from log where id = ? and log='濡쒓렇�씤' order by reg_dt desc";
 				pstmt = con.prepareStatement(sql2);
 				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
@@ -161,6 +162,46 @@ public class ojmDAO {
 		
 		String sql = "select ";
 		
+	}
+	
+	public static List<String> selectIdList(MemberVO vo) {
+		List<String> idList = new ArrayList<String>();
+		getCon();
+		String sql = "select id from member where email=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getEmail());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				idList.add(rs.getString(1));
+			}
+			
+		} catch (Exception e) {
+		}finally {
+			close(con);
+		}
+		return idList;
+	}
+	
+	public static int updatePassword(MemberVO vo) {
+		getCon();
+		String sql = "update member set pw = ? "+
+					"where name = ? and email = ? and id = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getPw());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getId());
+			return pstmt.executeUpdate(); // 정상 실행시 1 반환
+		}catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			close(con);
+		}
 	}
 
 }

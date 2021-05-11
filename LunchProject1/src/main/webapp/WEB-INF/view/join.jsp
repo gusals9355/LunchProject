@@ -16,7 +16,7 @@
 				<h1>회원가입</h1>
 				<p>	&nbsp; 환영합니다!</p>
 			</header>
-			<form action="/join" method="post">
+			<form action="/join" method="post" onsubmit="return verify();"W>
 			<div class="input_row">
 				<input class="int" type="text" name="name" placeholder="이름" maxlength="20" required="required" value="${param.name }">
 			</div>
@@ -49,15 +49,7 @@
 		</section>
 	</div>
 	
-	<script>
-		var pw = document.getElementById("pw");
-		var pw2 = document.getElementById("pw2");
-		function verify(){
-			if(pw.value != pw2.value){
-				alert('비밀번호를 확인해주세요');
-			}
-		}
-	</script>
+	
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
