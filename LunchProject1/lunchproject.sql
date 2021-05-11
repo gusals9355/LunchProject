@@ -3,7 +3,7 @@ create table member(
 	email varchar(50) not null,
 	gender enum('M','F') not null,
 	id varchar(20) primary key,
-	pw varchar(20) not null,
+	pw varchar(60) not null,
 	reg_dt datetime default now()
 );
 

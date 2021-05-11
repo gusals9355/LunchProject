@@ -1,6 +1,5 @@
 package com.koreait.lunch.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Random;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +37,7 @@ public class WriteServlet extends HttpServlet {
 		
 		request.setAttribute("typelist",typelist);
 		request.setAttribute("ipAddress", ipAddress);
-		MyUtils.openJSP("write", request, response);
+		MyUtils.openJSP("/write", request, response);
 	}
 
 	

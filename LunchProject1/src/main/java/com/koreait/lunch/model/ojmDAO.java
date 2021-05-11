@@ -84,24 +84,26 @@ public class ojmDAO {
 		
 	}
 	
-	public static boolean tryLogin(MemberVO bean) {
+	public static String getHashedPw(MemberVO bean) {
 		getCon();
-		boolean verify = false;
-		
-		String sql = "select id, pw from member where id = ? and pw = ?";
+		String hashPW = "";
+		String sql = "select pw from member where id = ?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getId());
-			pstmt.setString(2, bean.getPw());
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) verify = true;
+			if(rs.next()) {
+				hashPW = rs.getString(1); //db에 있는 암호화 된 값
+			}
+			return hashPW;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return hashPW;
 		} finally {
 			close(con);
+			
 		}
-		return verify;
+		
 	}
 	
 	public static void upPoint(MemberVO vo) {

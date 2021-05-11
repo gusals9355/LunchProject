@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.koreait.lunch.model.MemberVO;
 import com.koreait.lunch.model.ojmDAO;
 
@@ -19,7 +21,9 @@ import com.koreait.lunch.model.ojmDAO;
 public class loginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		MyUtils.openJSP("login", request, response);
+		System.out.println("성공");
+		MyUtils.openJSP("/login", request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +38,13 @@ public class loginServlet extends HttpServlet {
 		vo.setId(id);
 		vo.setPw(pw);
 		
-		if(ojmDAO.tryLogin(vo)) { //로그인에 성공
+		String hashedPw = ojmDAO.getHashedPw(vo);
+		if(hashedPw.equals("") || !BCrypt.checkpw(pw, hashedPw)) { //
+			request.setAttribute("msg", msg);
+			doGet(request, response);
+			return;
+		}
+		if(BCrypt.checkpw(pw, hashedPw)) { // 암호화 되지 않는 값과 암호화된 db의 값과 비교한다. pw가 일치하면
 			str = "nav2.jsp";
 			session.setAttribute("str", str);
 			session.setAttribute("userID", vo.getId());
@@ -44,11 +54,7 @@ public class loginServlet extends HttpServlet {
 			ojmDAO.log(userID,"로그인"); //로그인시 로그들을 db에 저장
 			ojmDAO.logCheck(userID); //하루에 첫 로그인 시 출석체크가 되는 메소드
 			response.sendRedirect("/ojm");
-		} else {					  //로그인 실패
-			request.setAttribute("msg", msg);
-			doGet(request, response);
 		}
-		
 	}
 
 }

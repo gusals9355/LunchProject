@@ -16,7 +16,7 @@ import com.koreait.lunch.model.ojmDAO;
  * Servlet implementation class FindIdServlet
  */
 @WebServlet("/findid")
-public class FindIdServlet extends HttpServlet {
+public class FIndIdServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
