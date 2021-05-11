@@ -19,7 +19,6 @@ import com.koreait.lunch.model.ojmDAO;
 public class loginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		//commit
 		MyUtils.openJSP("login", request, response);
 	}
 
@@ -42,14 +41,8 @@ public class loginServlet extends HttpServlet {
 			String userID = (String) session.getAttribute("userID");
 			//로그인 성공 시 포인트를 획득함
 			//로그인 포인트는 하루에 한번만 받을 수 있음
-			String date = ojmDAO.log(userID,"로그인"); //로그인시 로그들을 db에 저장
-			SimpleDateFormat sdf = new SimpleDateFormat("dd");
-			Date nowDate = new Date();
-			String date2 = sdf.format(nowDate);
-			if(!date.equals(date2)) {
-				
-			}
-			
+			ojmDAO.log(userID,"로그인"); //로그인시 로그들을 db에 저장
+			ojmDAO.logCheck(userID); //하루에 첫 로그인 시 출석체크가 되는 메소드
 			response.sendRedirect("/ojm");
 		} else {					  //로그인 실패
 			request.setAttribute("msg", msg);
