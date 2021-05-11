@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.koreait.lunch.model.MemberVO;
 import com.koreait.lunch.model.ojmDAO;
 
@@ -32,21 +34,20 @@ public class joinServlet extends HttpServlet {
 		
 		if(!pw.equals(pw2)) { //패스워드 일치 여부
 			doGet(request, response);
-		} else {
-			MemberVO bean = new MemberVO();
-			bean.setName(name);
-			bean.setId(id);
-			bean.setEmail(email);
-			bean.setPw(pw);
-			bean.setPw2(pw2);
-			bean.setGender(gender);
-			
-			if(ojmDAO.insertMember(bean)) { //아이디 중복 검사
-				request.setAttribute("msg", msg);
-				doGet(request, response);
-			}
-			response.sendRedirect("/ojm");
 		}
+		String hashedPw = BCrypt.hashpw(pw, BCrypt.gensalt());
+		MemberVO bean = new MemberVO();
+		bean.setName(name);
+		bean.setId(id);
+		bean.setEmail(email);
+		bean.setPw(hashedPw);
+		bean.setGender(gender);
+		
+		if(ojmDAO.insertMember(bean)) { //아이디 중복 검사
+			request.setAttribute("msg", msg);
+			doGet(request, response);
+		}
+		response.sendRedirect("/ojm");
 		
 	}
 

@@ -119,34 +119,35 @@ public class ojmDAO {
 		
 	}
 	
-	public static void log(String id, String str) { //로그인 로그를 저장하는 메소드
+	public static void log(String id, String str) { //로그인 정보 (로그)를 저장하는 메소드
 		getCon();
-		int attendance = 1;
-		String target="";
-		
-		String sql = "insert into log (id, log, attendance) values(?,?,?)";
+		String sql = "insert into log (id, log) values(?,?)";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, str);
-			pstmt.setInt(3, attendance);
 			pstmt.executeUpdate();
-			if(str.equals("로그인")) {
-				int cnt = 0;
-				//출석체크하기 위해 현재 로그인 이전 날짜를 가져오기 위한 sql문
-				String sql2 = "select day(reg_dt) from log where id = ? and log='로그인' order by reg_dt desc";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con);
+		}
+	}
+	
+	public static void logCheck(String id) {
+		getCon();
+		
+		String sql ="select * from log where id = ? and log='로그인' and day(reg_dt) = day(now()) limit 1";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String sql2 = "update log set attendance = 1 where id = ? and log='로그인' and day(reg_dt) = day(now()) limit 1";
 				pstmt = con.prepareStatement(sql2);
 				pstmt.setString(1, id);
-				rs = pstmt.executeQuery();
-				while(rs.next()) {
-					if(cnt==0) target = rs.getString(1);
-					if(cnt == 1) {
-						if(target.equals(rs.getString(1))) {
-							attendance = 0;
-						}
-					}
-					cnt++;
-				}
+				pstmt.executeUpdate();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
