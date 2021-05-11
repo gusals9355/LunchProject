@@ -3,6 +3,8 @@ package com.koreait.lunch.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -164,4 +166,44 @@ public class ojmDAO {
 		
 	}
 
+	public static List<String> selectIdList(MemberVO vo) {
+		List<String> idList = new ArrayList<String>();
+		getCon();
+		String sql = "select id from member where email=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getEmail());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				idList.add(rs.getString(1));
+			}
+			
+		} catch (Exception e) {
+		}finally {
+			close(con);
+		}
+		return idList;
+	}
+	
+	public static int updatePassword(MemberVO vo) {
+		getCon();
+		String sql = "update member set pw = ? "+
+					"where name = ? and email = ? and id = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getPw());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getId());
+			return pstmt.executeUpdate(); // 정상 실행시 1 반환
+		}catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			close(con);
+		}
+
+	}
 }
