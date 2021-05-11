@@ -28,7 +28,7 @@ function updateImageDisplay() {
 	      listItem.appendChild(image);
 	      listItem.appendChild(para);
 	    } else {
-	      para.textContent = "파일 타입이 올바르지 않습니다. 다시 확인해주세요.";
+	      para.textContent = '파일 타입이 올바르지 않습니다. 다시 확인해주세요.';
 	      listItem.appendChild(para);
 	    }
 
@@ -38,16 +38,16 @@ function updateImageDisplay() {
 }
   
 const fileTypes = [
-	"image/apng",
-	"image/bmp",
-	"image/gif",
-	"image/jpeg",
-	"image/pjpeg",
-	"image/png",
-	"image/svg+xml",
-	"image/tiff",
-	"image/webp",
-	"image/x-icon"
+	'image/apng',
+	'image/bmp',
+	'image/gif',
+	'image/jpeg',
+	'image/pjpeg',
+	'image/png',
+	'image/svg+xml',
+	'image/tiff',
+	'image/webp',
+	'image/x-icon'
 ];
 
 function validFileType(file) {
@@ -55,14 +55,25 @@ function validFileType(file) {
 }
 
 function goMyPage(){
-	location.href="/mypage";
+	location.href='/mypage';
 }
 function goRanking(){
-	location.href="/ranking";
+	location.href='/ranking';
 }
 function goRank(){
-	location.href="/rank";
+	location.href='/rank';
 }
 function setType(type){
-    document.getElementById("foodType").value = type;
+    document.getElementById('foodType').value = type;
 } 
+
+//join 비번 확인
+var pw = document.getElementById('pw');
+var pw2 = document.getElementById('pw2');
+
+function verify(){
+	if(pw.value != pw2.value){
+		alert('비밀번호를 확인해주세요');
+		return false;
+	}
+}
