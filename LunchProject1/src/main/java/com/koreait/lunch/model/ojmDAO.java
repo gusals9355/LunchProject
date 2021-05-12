@@ -1,8 +1,10 @@
 package com.koreait.lunch.model;
 
+import java.awt.Point;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -10,6 +12,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import com.koreait.lunch.model.board.BoardVO;
+import com.koreait.lunch.model.member.MemberVO;
 
 public class ojmDAO {
 	static Connection con;
@@ -27,6 +32,7 @@ public class ojmDAO {
 			e.printStackTrace();
 		}
 	}
+	
 	public static void close(Connection con) {
 		if(con != null) {try {con.close();}catch (Exception e) {e.printStackTrace();}}
 	}
@@ -35,7 +41,7 @@ public class ojmDAO {
 		getCon();
 		boolean verify = true;
 		
-		String sql ="insert into member(name,email,gender,id,pw) value(?,?,?,?,?)";
+		String sql ="insert into member(name,email,gender,id,pw,nickname) value(?,?,?,?,?,?)";
 		try {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, bean.getName());
@@ -43,6 +49,7 @@ public class ojmDAO {
 			pstmt.setString(3, bean.getGender());
 			pstmt.setString(4, bean.getId());
 			pstmt.setString(5, bean.getPw());
+			pstmt.setString(6, bean.getName());
 			pstmt.executeUpdate();
 			verify = false;
 		} catch (Exception e) {
@@ -84,15 +91,15 @@ public class ojmDAO {
 		
 	}
 	
-	public static String getHashedPw(MemberVO bean) {
+	public static String getHashedPw(MemberVO vo) { //패스워드 확인
 		getCon();
 		String hashPW = "";
 		String sql = "select pw from member where id = ?";
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, bean.getId());
+			pstmt.setString(1, vo.getId());
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if(rs.next()) { //로그인 성공한다면
 				hashPW = rs.getString(1); //db에 있는 암호화 된 값
 			}
 			return hashPW;
@@ -106,21 +113,30 @@ public class ojmDAO {
 		
 	}
 	
-	public static void upPoint(MemberVO vo) {
+	public static MemberVO getUserInfo(MemberVO vo) {
 		getCon();
-		int point = 5; //로그인 포인트를 5로 설정함
-		String sql = "update point set point = point +"+point+" where id = ?";
+		MemberVO userInfo = new MemberVO();
+		String sql = "select * from member where id = ?";
 		
 		try {
-			pstmt = con.prepareStatement(sql);
+			pstmt= con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
-			pstmt.executeUpdate();
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				userInfo.setId(rs.getString("id"));
+				userInfo.setGender(rs.getString("gender"));
+				userInfo.setName(rs.getString("name"));
+				userInfo.setEmail(rs.getString("email"));
+				userInfo.setNickName(rs.getString("nickname"));
+				userInfo.setPoint(rs.getString("point"));
+			}
+			return userInfo;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(con);
 		}
-		
+		return userInfo;
 	}
 	
 	public static void log(String id, String str) { //로그인 정보 (로그)를 저장하는 메소드
@@ -148,10 +164,18 @@ public class ojmDAO {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				String sql2 = "update log set attendance = 1 where id = ? and log='로그인' and day(reg_dt) = day(now()) limit 1";
-				pstmt = con.prepareStatement(sql2);
-				pstmt.setString(1, id);
-				pstmt.executeUpdate();
+				if(rs.getInt("attendance")!=1) {
+					String sql2 = "update log set attendance = 1 where id = ? and log='로그인' and day(reg_dt) = day(now()) limit 1";
+					pstmt = con.prepareStatement(sql2);
+					pstmt.setString(1, id);
+					if(pstmt.executeUpdate() == 1) {
+						int point = 25; //로그인 포인트
+						String sql3 = "update member set point=point+"+point+" where id = ?";
+						pstmt= con.prepareStatement(sql3);
+						pstmt.setString(1, id);
+						pstmt.executeUpdate();
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,13 +185,6 @@ public class ojmDAO {
 		
 	}
 	
-	public static void selectPoint(MemberVO vo) {
-		getCon();
-		
-		String sql = "select ";
-		
-	}
-
 	public static List<String> selectIdList(MemberVO vo) {
 		List<String> idList = new ArrayList<String>();
 		getCon();

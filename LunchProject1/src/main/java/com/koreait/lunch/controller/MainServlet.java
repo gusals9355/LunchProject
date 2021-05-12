@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.koreait.lunch.model.ojmDAO;
+
 @WebServlet("/ojm")
 public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String str = "nav.jsp";
-		if(session.getAttribute("str") == null) { //로그인이 되지않으면 nav이 보임
-			session.setAttribute("str", str);
-		}
+		MyUtils.getNav(request);
 		MyUtils.openJSP("ojm", request, response);
+		//commit
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

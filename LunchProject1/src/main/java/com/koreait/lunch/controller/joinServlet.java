@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.koreait.lunch.model.MemberVO;
 import com.koreait.lunch.model.ojmDAO;
+import com.koreait.lunch.model.member.MemberVO;
 
 @WebServlet("/join")
 public class joinServlet extends HttpServlet {

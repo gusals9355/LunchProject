@@ -9,7 +9,7 @@
 <title>내 정보 | 오늘 점심 뭐먹지?</title>
 </head>
 <body>
-<jsp:include page="../view2/${str }" flush="false"/>
+<jsp:include page="../nav/${str }" flush="false"/>
 	<section class="content">
 		<div class="container">
 			<div class="row">

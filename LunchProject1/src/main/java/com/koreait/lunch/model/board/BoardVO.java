@@ -1,4 +1,4 @@
-package com.koreait.lunch.model;
+package com.koreait.lunch.model.board;
 
 import java.util.List;
 

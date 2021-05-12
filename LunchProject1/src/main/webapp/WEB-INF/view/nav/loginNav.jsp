@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,11 +20,11 @@
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	      </ul>
 	  		<div class="btn-group" role="group" aria-label="First group">
-			    <button type="button" class="btn btn-outline-secondary">${userID }님</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="editNickName()">${userInfo.nickName }님</button>
 			    <button type="button" class="btn btn-outline-secondary" onclick="goRank()">등급</button>
 			    <button type="button" class="btn btn-outline-secondary" onclick="goRanking()">랭킹</button>
 			    <button type="button" class="btn btn-outline-secondary" onclick="goMyPage()">내정보</button>
-			    <button type="button" class="btn btn-outline-secondary">포인트</button>
+			    <button type="button" class="btn btn-outline-secondary"><fmt:formatNumber groupingUsed="true" value="${userInfo.point}"/>xp </button>
 	  		</div>
 	      <form class="d-flex" action="/logout" method="post">
 	        <button class="btn btn-outline-success" type="submit">로그아웃</button>

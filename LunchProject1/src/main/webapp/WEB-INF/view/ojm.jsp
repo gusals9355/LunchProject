@@ -10,7 +10,7 @@
 <title>abcd</title>
 </head>
 <body>
-<jsp:include page="../view2/${str }" flush="false"/>
+<jsp:include page="nav/${str }" flush="false"/>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965&libraries=services"></script>
 	<div>
 		<div id="map" style="width:500px;height:400px;"></div>

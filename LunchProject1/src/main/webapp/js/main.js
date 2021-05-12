@@ -67,19 +67,11 @@ function setType(type){
     document.getElementById('foodType').value = type;
 } 
 
-//join 비번 확인
-
-function verify(){
-	var pw = document.getElementById('pw');
-	var pw2 = document.getElementById('pw2');
-	if(pw.value != pw2.value){
-		alert('비밀번호를 확인해주세요');
-		console.log('비번틀림');
-		return false;
-	}
+function editNickName(){
+	location.href='/editNickName';
 }
-<<<<<<< HEAD
-=======
+
+//join 비번 확인
 
 function verify(){
 	var pw = document.getElementById("pw");
@@ -89,4 +81,3 @@ function verify(){
 		return false;
 	}
 }
->>>>>>> branch 'main' of https://github.com/gusals9355/LunchProject.git

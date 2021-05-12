@@ -1,14 +1,26 @@
-package com.koreait.lunch.model;
+package com.koreait.lunch.model.member;
 
 public class MemberVO {
 	private String name;
+	private String nickName;
 	private String email;
 	private String gender;
 	private String id;
 	private String pw;
-	private String pw2;
+	private String point;
 	
-	
+	public String getPoint() {
+		return point;
+	}
+	public void setPoint(String point) {
+		this.point = point;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -39,12 +51,5 @@ public class MemberVO {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public String getPw2() {
-		return pw2;
-	}
-	public void setPw2(String pw2) {
-		this.pw2 = pw2;
-	}
-	
 	
 }

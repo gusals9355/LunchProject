@@ -1,4 +1,4 @@
-package com.koreait.lunch.controller;
+package com.koreait.lunch.controller.my;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.koreait.lunch.model.MemberVO;
 import com.koreait.lunch.model.ojmDAO;
+import com.koreait.lunch.model.member.MemberVO;
 
 /**
  * Servlet implementation class FindIdServlet

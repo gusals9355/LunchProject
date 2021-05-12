@@ -1,9 +1,11 @@
 create table member(
 	name varchar(10) not null,
+	nickname varchar(10),
 	email varchar(50) not null,
 	gender enum('M','F') not null,
 	id varchar(20) primary key,
 	pw varchar(60) not null,
+	point int default 0,
 	reg_dt datetime default now()
 );
 

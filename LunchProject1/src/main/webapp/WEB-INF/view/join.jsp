@@ -9,7 +9,7 @@
 <title>회원가입 | 오늘 점심 뭐먹지?</title>
 </head>
 <body>
-<jsp:include page="../view2/${str }" flush="false"/>
+<jsp:include page="nav/${str }" flush="false"/>
 	<div id="container">
 		<section class="content">
 			<header class="content-title">

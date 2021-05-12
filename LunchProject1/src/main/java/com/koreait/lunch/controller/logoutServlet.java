@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
-import com.koreait.lunch.model.MemberVO;
 import com.koreait.lunch.model.ojmDAO;
+import com.koreait.lunch.model.member.MemberVO;
 
 @WebServlet("/logout")
 public class logoutServlet extends HttpServlet {
@@ -20,9 +20,10 @@ public class logoutServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String userID = (String) session.getAttribute("userID");
-		ojmDAO.log(userID, "로그아웃");
-		session.removeAttribute("str");
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		System.out.println(userInfo.getId());
+		ojmDAO.log(userInfo.getId(), "로그아웃");
+		session.invalidate();
 		response.sendRedirect("/ojm");
 	}
 
