@@ -17,10 +17,11 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MyUtils.getNav(request);
 		MyUtils.openJSP("ojm", request, response);
-		//commit
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//commit
 		
 	}
 
