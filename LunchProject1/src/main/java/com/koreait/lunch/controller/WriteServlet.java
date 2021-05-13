@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.koreait.lunch.model.ojmDAO;
 import com.koreait.lunch.model.board.BoardVO;
 import com.oreilly.servlet.MultipartRequest;
@@ -53,7 +55,7 @@ public class WriteServlet extends HttpServlet {
 		BoardVO vo = new BoardVO();
 		
 		String savePath = request.getRealPath("upload"); //저장경로
-		String path = "C:\\Users\\Administrator\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
+		String path = "C:\\Users\\user\\git\\LunchProject\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
 		System.out.println(path);
 		System.out.println(savePath);
 		int sizeLimit = 1024*1024*15; //파일크기
@@ -70,7 +72,10 @@ public class WriteServlet extends HttpServlet {
 				category=multi.getParameter("category");
 				mapX=multi.getParameter("lng");
 				mapY=multi.getParameter("lat");
-				
+				if(star==null||category==null||mapX==null||mapY==null) {
+					doGet(request, response);
+					return;
+				}
 				List<String> list = new ArrayList<String>();
 				while(files.hasMoreElements()) {
 					String fileInput = (String) files.nextElement();
@@ -78,9 +83,8 @@ public class WriteServlet extends HttpServlet {
 					System.out.println(picture);
 					list.add(picture);
 				}
-				
 				vo.setId(id);
-				vo.setPw(pw);
+				vo.setPw(BCrypt.hashpw(pw, BCrypt.gensalt()));
 				vo.setTitle(title);
 				vo.setContent(content);
 				vo.setStar(Integer.parseInt(star));
@@ -88,11 +92,13 @@ public class WriteServlet extends HttpServlet {
 				vo.setMapX(Double.parseDouble(mapX));
 				vo.setMapY(Double.parseDouble(mapY));
 				vo.setPicture(list);
+				ojmDAO.insertBoard(vo);
 			} catch (Exception e) {
 				e.printStackTrace();
+				doGet(request, response);
 				System.out.println("업로드 실패");
+				return;
 			}
-			ojmDAO.insertBoard(vo);
 		response.sendRedirect("/ojm");
 	}
 

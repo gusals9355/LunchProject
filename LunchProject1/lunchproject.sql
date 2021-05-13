@@ -4,7 +4,7 @@ create table member(
 	email varchar(50) not null,
 	gender enum('M','F') not null,
 	id varchar(20) primary key,
-	pw varchar(60) not null,
+	pw char(60) not null,
 	point int default 0,
 	reg_dt datetime default now()
 );
@@ -20,7 +20,7 @@ create table board(
 	title varchar(30) not null,
 	content varchar(1000) not null,
 	id varchar(20) not null,
-	pw varchar(20),
+	pw char(60) not null,
 	readcount int default 0,
 	picture varchar(1000),
 	reg_dt datetime default now(),

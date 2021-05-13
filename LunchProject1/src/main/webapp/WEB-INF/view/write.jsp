@@ -34,7 +34,7 @@
 			<div class="row"> <!-- 하단블럭 -->
 				<div class="col category-div dropdown"> <!-- 카테고리 -->
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="food" data-bs-toggle="dropdown" aria-expanded="false">
-						<span id="asd">음식 종류</span>
+						<span id="food">음식 종류</span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="food">
 						<c:forEach var="type" items="${typelist}">
@@ -45,7 +45,7 @@
 				<div class="col star-div dropdown"><!-- 평점 -->
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="stars" data-bs-toggle="dropdown" aria-expanded="false">
 						<span id="zxc">평점</span>
-						<i id="star"></i>
+						<c:forEach var="i" begin="1" end="5"><i id="star${i}"></i></c:forEach>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="stars">
 						<c:forEach var="i" begin="1" end="5">
@@ -66,10 +66,10 @@
 		</div>
 		<div class="col right_layout"> <!-- 오른쪽 레이아웃 (주 폼태그) -->
 			<form action="/write" method="post" enctype="multipart/form-data"> <!-- get방식 전송불가 -->
-				<input type="hidden" name="lng" id="lng" value="">
-				<input type="hidden" name="lat" id="lat" value="">
-				<input type="hidden" name="star" id="star" value="5">
-				<input type="hidden" name="category" id="foodType" value="">
+				<input type="hidden" name="lng" id="lng">
+				<input type="hidden" name="lat" id="lat">
+				<input type="hidden" name="star" id="star">
+				<input type="hidden" name="category" id="foodType">
 				<c:if test="${userInfo eq null }">
 					<div class="row"> <!-- id,pw -->
 						<div class="col">

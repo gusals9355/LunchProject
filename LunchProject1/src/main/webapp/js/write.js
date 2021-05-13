@@ -55,17 +55,32 @@ function validFileType(file) {
 }
 function setType(type){
     document.getElementById('foodType').value = type;
-	document.getElementById('asd').innerHTML = type;
+	document.getElementById('food').innerHTML = type;
 }
 function setStar(i) {
     document.getElementById('star').value = i;
 	document.getElementById('zxc').innerHTML = "";
 	switch(i){
-		case 1: document.getElementById('star').className='bi bi-star-fill'; break;
-		case 2:	document.getElementById('star').className='bi bi-star-fill'; break;
-		case 3:	document.getElementById('star').className='bi bi-star-fill'; break;
-		case 4: document.getElementById('star').className='bi bi-star-fill'; break;
-		case 5: document.getElementById('star').className='bi bi-star-fill'; break;
+		case 1:
+		for(var j=1; j<=i; j++)document.getElementById('star'+j).className='bi bi-star-fill';
+		for(var j; j<=5; j++)document.getElementById('star'+j).className='bi bi-star';
+		break;
+		case 2:
+		for(var j=1; j<=i; j++)document.getElementById('star'+j).className='bi bi-star-fill';
+		for(var j; j<=5; j++)document.getElementById('star'+j).className='bi bi-star';
+		break;
+		case 3:
+		for(var j=1; j<=i; j++)document.getElementById('star'+j).className='bi bi-star-fill';
+		for(var j; j<=5; j++)document.getElementById('star'+j).className='bi bi-star';
+		break;
+		case 4:
+		for(var j=1; j<=i; j++)document.getElementById('star'+j).className='bi bi-star-fill';
+		for(var j; j<=5; j++)document.getElementById('star'+j).className='bi bi-star';
+		break;
+		case 5:
+		for(var j=1; j<=i; j++)document.getElementById('star'+j).className='bi bi-star-fill';
+		for(var j; j<=5; j++)document.getElementById('star'+j).className='bi bi-star';
+		break;
 	}
 }
 
