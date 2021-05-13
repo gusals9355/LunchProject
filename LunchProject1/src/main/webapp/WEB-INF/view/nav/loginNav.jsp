@@ -20,10 +20,10 @@
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	      </ul>
 	  		<div class="btn-group" role="group" aria-label="First group">
-			    <button type="button" class="btn btn-outline-secondary" onclick="editNickName()">${userInfo.nickName }님</button>
-			    <button type="button" class="btn btn-outline-secondary" onclick="goRank()">등급</button>
-			    <button type="button" class="btn btn-outline-secondary" onclick="goRanking()">랭킹</button>
-			    <button type="button" class="btn btn-outline-secondary" onclick="goMyPage()">내정보</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('editNickName')">${userInfo.nickName }님</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('rank')">등급</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('ranking')">랭킹</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('mypage')">내정보</button>
 			    <button type="button" class="btn btn-outline-secondary"><fmt:formatNumber groupingUsed="true" value="${userInfo.point}"/>xp </button>
 	  		</div>
 	      <form class="d-flex" action="/logout" method="post">
@@ -32,7 +32,7 @@
 	    </div>
 	  </div>
 	</nav>
-<script src="/js/main.js"></script>
+<script src="/js/common.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>

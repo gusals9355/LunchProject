@@ -4,8 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/main.css">
 <title>회원가입 | 오늘 점심 뭐먹지?</title>
 </head>
 <body>
@@ -26,7 +24,7 @@
 			</div>
 			<div class="input_row2 btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-secondary">
-					<input type="radio" name="gender" value="M" checked="checked"> 남
+					<input type="radio" name="gender" value="M" checked> 남
 				</label>
 				<label class="btn btn-secondary">
 					<input type="radio" name="gender" value="F"> 여
@@ -48,7 +46,6 @@
 			</form>
 		</section>
 	</div>
-<script src="/js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script src="/js/join.js"></script>
 </body>
 </html>

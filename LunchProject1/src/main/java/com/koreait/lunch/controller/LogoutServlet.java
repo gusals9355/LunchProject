@@ -1,8 +1,6 @@
 package com.koreait.lunch.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.koreait.lunch.model.ojmDAO;
+import com.koreait.lunch.model.member.MemberVO;
 
-@WebServlet("/ojm")
-public class MainServlet extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.getNav(request);
-		MyUtils.openJSP("ojm", request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
+		System.out.println(userInfo.getId());
+		ojmDAO.log(userInfo.getId(), "로그아웃");
+		session.invalidate();
+		response.sendRedirect("/ojm");
 	}
 
 }

@@ -23,19 +23,19 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class WriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] typelist = {"한식","양식","일식","중식","분식","카페","기타"};
-		Random rd = new Random();
-		String anonymous = rd.ints(48, 123).filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(10).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
-		
-		request.setAttribute("anonymous", anonymous);
-		        
-		String ipAddress=request.getRemoteAddr();
-		if(ipAddress.equalsIgnoreCase("0:0:0:0:0:0:0:1")){
-		    InetAddress inetAddress=InetAddress.getLocalHost();
-		    ipAddress=inetAddress.getHostAddress();
-		}
-		
 		request.setAttribute("typelist",typelist);
-		request.setAttribute("ipAddress", ipAddress);
+		
+		if(MyUtils.getLoginUser(request) == null) {
+			Random rd = new Random();
+			String anonymous = rd.ints(48, 123).filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(10).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+			request.setAttribute("anonymous", anonymous);
+		}
+//		String ipAddress=request.getRemoteAddr();
+//		if(ipAddress.equalsIgnoreCase("0:0:0:0:0:0:0:1")){
+//			InetAddress inetAddress=InetAddress.getLocalHost();
+//			ipAddress=inetAddress.getHostAddress();
+//		}
+//		request.setAttribute("ipAddress", ipAddress);
 		MyUtils.openJSP("/write", request, response);
 	}
 
@@ -45,7 +45,7 @@ public class WriteServlet extends HttpServlet {
 		String pw = "";
 		String title = "";
 		String content = "";
-		String star1 = "";
+		String star = "";
 		String category = "";
 		String mapX = "";
 		String mapY = "";
@@ -53,7 +53,7 @@ public class WriteServlet extends HttpServlet {
 		BoardVO vo = new BoardVO();
 		
 		String savePath = request.getRealPath("upload"); //저장경로
-		String path = "C:\\Users\\user\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
+		String path = "C:\\Users\\Administrator\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
 		System.out.println(path);
 		System.out.println(savePath);
 		int sizeLimit = 1024*1024*15; //파일크기
@@ -66,10 +66,10 @@ public class WriteServlet extends HttpServlet {
 				pw=multi.getParameter("pw");
 				title=multi.getParameter("title");
 				content=multi.getParameter("content");
-				star1=multi.getParameter("star1");
+				star=multi.getParameter("star");
 				category=multi.getParameter("category");
-				mapX=multi.getParameter("mapX");
-				mapY=multi.getParameter("mapY");
+				mapX=multi.getParameter("lng");
+				mapY=multi.getParameter("lat");
 				
 				List<String> list = new ArrayList<String>();
 				while(files.hasMoreElements()) {
@@ -83,7 +83,7 @@ public class WriteServlet extends HttpServlet {
 				vo.setPw(pw);
 				vo.setTitle(title);
 				vo.setContent(content);
-				vo.setStar(Integer.parseInt(star1));
+				vo.setStar(Integer.parseInt(star));
 				vo.setCategory(category);
 				vo.setMapX(Double.parseDouble(mapX));
 				vo.setMapY(Double.parseDouble(mapY));
@@ -92,8 +92,7 @@ public class WriteServlet extends HttpServlet {
 				e.printStackTrace();
 				System.out.println("업로드 실패");
 			}
-		
-		ojmDAO.insertBoard(vo);
+			ojmDAO.insertBoard(vo);
 		response.sendRedirect("/ojm");
 	}
 

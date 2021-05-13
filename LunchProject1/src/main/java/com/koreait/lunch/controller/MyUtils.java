@@ -40,7 +40,6 @@ public class MyUtils {
 		if(request == null) return null;
 		HttpSession hs = request.getSession();
 		return (MemberVO) hs.getAttribute("loginUser");
-		
 	}
 	
 	public static String getLoginUserID(HttpServletRequest request) {

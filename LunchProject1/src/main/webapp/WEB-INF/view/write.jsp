@@ -5,11 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/boot/bootstrap.css"> -->
-<link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <title>글쓰기</title>
 </head>
 <body>
@@ -36,18 +33,19 @@
 			</div>
 			<div class="row"> <!-- 하단블럭 -->
 				<div class="col category-div dropdown"> <!-- 카테고리 -->
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="foodType" data-bs-toggle="dropdown" aria-expanded="false">
-					음식 종류
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="food" data-bs-toggle="dropdown" aria-expanded="false">
+						<span id="asd">음식 종류</span>
 					</button>
-					<ul class="dropdown-menu" aria-labelledby="foodType">
+					<ul class="dropdown-menu" aria-labelledby="food">
 						<c:forEach var="type" items="${typelist}">
-							<li><button class="dropdown-item" type="button" onclick="setType(${type})">${type}</button></li>
+							<li><button class="dropdown-item" type="button" onclick="setType('${type}')">${type}</button></li>
 						</c:forEach>
 					</ul>
 				</div>
 				<div class="col star-div dropdown"><!-- 평점 -->
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="stars" data-bs-toggle="dropdown" aria-expanded="false">
-						평점
+						<span id="zxc">평점</span>
+						<i id="star"></i>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="stars">
 						<c:forEach var="i" begin="1" end="5">
@@ -71,15 +69,17 @@
 				<input type="hidden" name="lng" id="lng" value="">
 				<input type="hidden" name="lat" id="lat" value="">
 				<input type="hidden" name="star" id="star" value="5">
-				<input type="hidden" name="foodType" id="foodType" value="">
-				<div class="row"> <!-- id,pw -->
-					<div class="col">
-						<input type="text" name="id" value="${anonymous }" placeholder="아이디" maxlength="20" required>
+				<input type="hidden" name="category" id="foodType" value="">
+				<c:if test="${userInfo eq null }">
+					<div class="row"> <!-- id,pw -->
+						<div class="col">
+							<input type="text" name="id" value="${anonymous }" placeholder="아이디" maxlength="20" required>
+						</div>
+						<div class="col">
+							<input type="password" name="pw" placeholder="비밀번호" maxlength="20" required>
+						</div>
 					</div>
-					<div class="col">
-						<input type="password" name="pw" placeholder="비밀번호" maxlength="20" required>
-					</div>
-				</div>
+				</c:if>
 				<div>
 					<input type="text" name="title" maxlength="30" placeholder="제목" size="60" autofocus required>
 				</div>
@@ -101,7 +101,7 @@
 					<div class="col"> <!-- 등록 -->
 						<button type="button" class="cancel btn btn-secondary" onclick="">취소</button>
 					</div>
-					<div class="col align-self-end">
+					<div class="col">
 						<input type="submit" class="submit btn btn-success" value="등록">
 					</div>
 				</div>
@@ -109,8 +109,7 @@
 		</div>
 	</div>
 </div>
-<script src="/js/main.js"></script>
+<script src="/js/write.js"></script>
 <script src="/js/kakao.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 </body>
 </html>

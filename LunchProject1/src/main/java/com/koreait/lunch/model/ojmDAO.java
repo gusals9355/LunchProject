@@ -64,10 +64,10 @@ public class ojmDAO {
 	public static void insertBoard(BoardVO vo) {
 		getCon();
 		
-		String pictureList = "";
-		for (String i : vo.getPicture()) { //다중 파일이 업로드될때 구분자를 주기 위한 문장
-			pictureList+=i;
-		}
+//		String pictureList = "";
+//		for (String i : vo.getPicture()) { //다중 파일이 업로드될때 구분자를 주기 위한 문장
+//			pictureList+=i;
+//		}
 		
 		String sql = "insert into board(title, content, id, pw, picture, star, category, mapX, mapY)"
 				+ "values(?,?,?,?,?,?,?,?,?)";
@@ -77,7 +77,7 @@ public class ojmDAO {
 			pstmt.setString(2, vo.getContent());
 			pstmt.setString(3, vo.getId());
 			pstmt.setString(4, vo.getPw());
-			pstmt.setString(5, pictureList);
+			pstmt.setString(5, vo.getPicture().get(0));
 			pstmt.setInt(6, vo.getStar());
 			pstmt.setString(7, vo.getCategory());
 			pstmt.setDouble(8, vo.getMapX());
@@ -157,7 +157,7 @@ public class ojmDAO {
 	public static void logCheck(String id) {
 		getCon();
 		
-		String sql ="select * from log where id = ? and log='로그인' and day(reg_dt) = day(now()) limit 1";
+		String sql ="select * from log where id = ? and log='로그인' and date(reg_dt) = date(now()) limit 1";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -165,7 +165,7 @@ public class ojmDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getInt("attendance")!=1) {
-					String sql2 = "update log set attendance = 1 where id = ? and log='로그인' and day(reg_dt) = day(now()) limit 1";
+					String sql2 = "update log set attendance = 1 where id = ? and log='로그인' and date(reg_dt) = date(now()) limit 1";
 					pstmt = con.prepareStatement(sql2);
 					pstmt.setString(1, id);
 					if(pstmt.executeUpdate() == 1) {
