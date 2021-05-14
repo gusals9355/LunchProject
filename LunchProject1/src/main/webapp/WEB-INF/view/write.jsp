@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/boot/bootstrap.css"> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/write.css">
 <title>글쓰기</title>
 </head>
 <body>
@@ -32,9 +33,10 @@
 				</div>
 			</div>
 			<div class="row"> <!-- 하단블럭 -->
+				<p class="msg">${msg }</p>
 				<div class="col category-div dropdown"> <!-- 카테고리 -->
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="food" data-bs-toggle="dropdown" aria-expanded="false">
-						<span id="food">음식 종류</span>
+						<span id="asd">음식 종류</span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="food">
 						<c:forEach var="type" items="${typelist}">

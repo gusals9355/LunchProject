@@ -55,7 +55,7 @@ function validFileType(file) {
 }
 function setType(type){
     document.getElementById('foodType').value = type;
-	document.getElementById('food').innerHTML = type;
+	document.getElementById('asd').innerHTML = type;
 }
 function setStar(i) {
     document.getElementById('star').value = i;

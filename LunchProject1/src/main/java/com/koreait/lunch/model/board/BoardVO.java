@@ -7,19 +7,26 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private String id;
+	private String nickname;
 	private String pw;
 	private String category;
 	private int readCount;
 	private String reg_dt;
 	private int star;
-	private List<String> picture;
+	private String picture;
 	private double mapX;
 	private double mapY;
 	
-	public List<String> getPicture() {
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getPicture() {
 		return picture;
 	}
-	public void setPicture(List<String> picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 	public String getId() {

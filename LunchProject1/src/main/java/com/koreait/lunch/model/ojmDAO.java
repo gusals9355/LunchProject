@@ -77,7 +77,7 @@ public class ojmDAO {
 			pstmt.setString(2, vo.getContent());
 			pstmt.setString(3, vo.getId());
 			pstmt.setString(4, vo.getPw());
-			pstmt.setString(5, vo.getPicture().get(0));
+			pstmt.setString(5, vo.getPicture());
 			pstmt.setInt(6, vo.getStar());
 			pstmt.setString(7, vo.getCategory());
 			pstmt.setDouble(8, vo.getMapX());
@@ -108,9 +108,7 @@ public class ojmDAO {
 			return hashPW;
 		} finally {
 			close(con);
-			
 		}
-		
 	}
 	
 	public static MemberVO getUserInfo(MemberVO vo) {
@@ -223,6 +221,37 @@ public class ojmDAO {
 		}finally {
 			close(con);
 		}
-
 	}
+	
+	public static List<BoardVO> getAllBoard(){
+		getCon();
+		List<BoardVO> list = new ArrayList<BoardVO>();
+		String sql = "select * from board";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardVO vo = new BoardVO();
+				vo.setNo(rs.getInt("no"));
+				vo.setTitle(rs.getString("title"));
+				vo.setContent(rs.getString("content"));
+				vo.setId(rs.getString("id"));
+				vo.setReadCount(rs.getInt("readcount"));
+				vo.setPicture(rs.getString("picture"));
+				vo.setReg_dt(rs.getString("reg_dt"));
+				vo.setStar(rs.getInt("star"));
+				vo.setTitle(rs.getString("category"));
+				vo.setMapX(rs.getDouble("mapX"));
+				vo.setMapY(rs.getDouble("mapY"));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con);
+		}
+		return list;
+	}
+	
 }

@@ -20,7 +20,7 @@ public class loginServlet extends HttpServlet {
 		MyUtils.openJSP("login", request, response);
 		
 	}
-
+	@de
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String id = request.getParameter("id");

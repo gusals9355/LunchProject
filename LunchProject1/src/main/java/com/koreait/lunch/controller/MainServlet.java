@@ -16,11 +16,12 @@ import com.koreait.lunch.model.ojmDAO;
 public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MyUtils.getNav(request);
+		request.setAttribute("list",ojmDAO.getAllBoard());
 		MyUtils.openJSP("ojm", request, response);
-		//commitas
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }
