@@ -1,4 +1,4 @@
-package com.koreait.lunch.controller.my;
+package com.koreait.lunch.my.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

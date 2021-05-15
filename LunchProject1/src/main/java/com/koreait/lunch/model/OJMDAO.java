@@ -1,22 +1,19 @@
 package com.koreait.lunch.model;
 
-import java.awt.Point;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import com.koreait.lunch.model.board.BoardVO;
-import com.koreait.lunch.model.member.MemberVO;
+import com.koreait.lunch.board.model.BoardVO;
+import com.koreait.lunch.member.model.MemberVO;
 
-public class ojmDAO {
+public class OJMDAO {
 	static Connection con;
 	static PreparedStatement pstmt;
 	static ResultSet rs;

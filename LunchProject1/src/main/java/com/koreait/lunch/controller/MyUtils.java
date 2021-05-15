@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.koreait.lunch.model.member.MemberVO;
+import com.koreait.lunch.member.model.MemberVO;
 
 public class MyUtils {
 	public static void openJSP(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

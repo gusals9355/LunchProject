@@ -35,13 +35,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
 });
 
-function panTo(){ //home으로 이동
-	var moveLatLon = new kakao.maps.LatLng(35.86611866674244, 128.5938331533704);
-
-	setLevel();
-	map.panTo(moveLatLon);
-}
-
 //장소 검색
 function searchPlaces() {
 	var home='반월당 ';

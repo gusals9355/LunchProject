@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.koreait.lunch.model.ojmDAO;
-import com.koreait.lunch.model.member.MemberVO;
+import com.koreait.lunch.member.model.MemberVO;
+import com.koreait.lunch.model.OJMDAO;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
@@ -21,7 +21,7 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberVO userInfo = (MemberVO) session.getAttribute("userInfo");
 		System.out.println(userInfo.getId());
-		ojmDAO.log(userInfo.getId(), "로그아웃");
+		OJMDAO.log(userInfo.getId(), "로그아웃");
 		session.invalidate();
 		response.sendRedirect("/ojm");
 	}

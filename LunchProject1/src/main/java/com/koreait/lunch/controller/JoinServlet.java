@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.koreait.lunch.model.ojmDAO;
-import com.koreait.lunch.model.member.MemberVO;
+import com.koreait.lunch.member.model.MemberVO;
+import com.koreait.lunch.model.OJMDAO;
 
 @WebServlet("/join")
 public class JoinServlet extends HttpServlet {
@@ -43,7 +43,7 @@ public class JoinServlet extends HttpServlet {
 		bean.setPw(hashedPw);
 		bean.setGender(gender);
 		
-		if(ojmDAO.insertMember(bean)) { //아이디 중복 검사
+		if(OJMDAO.insertMember(bean)) { //아이디 중복 검사
 			request.setAttribute("msg", msg);
 			doGet(request, response);
 			return;

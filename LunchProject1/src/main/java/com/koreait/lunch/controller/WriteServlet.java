@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.koreait.lunch.model.ojmDAO;
-import com.koreait.lunch.model.board.BoardVO;
+import com.koreait.lunch.board.model.BoardVO;
+import com.koreait.lunch.model.OJMDAO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -74,7 +74,7 @@ public class WriteServlet extends HttpServlet {
 				vo.setMapX(Double.parseDouble(mapX));
 				vo.setMapY(Double.parseDouble(mapY));
 				vo.setPicture(list.get(0));
-				ojmDAO.insertBoard(vo);
+				OJMDAO.insertBoard(vo);
 			} catch (Exception e) {
 				e.printStackTrace();
 				request.setAttribute("msg", "카테고리 혹은 평점, 매장을 선택 해주세요.");

@@ -1,4 +1,4 @@
-package com.koreait.lunch.model.member;
+package com.koreait.lunch.member.model;
 
 public class MemberVO {
 	private String name;

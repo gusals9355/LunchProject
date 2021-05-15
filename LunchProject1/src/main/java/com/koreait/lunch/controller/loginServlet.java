@@ -1,6 +1,8 @@
 package com.koreait.lunch.controller;
 
 import java.io.IOException;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.koreait.lunch.model.ojmDAO;
-import com.koreait.lunch.model.member.MemberVO;
+import com.koreait.lunch.member.model.MemberVO;
+import com.koreait.lunch.model.OJMDAO;
 
 @WebServlet("/login")
 public class loginServlet extends HttpServlet {
@@ -32,7 +34,7 @@ public class loginServlet extends HttpServlet {
 		vo.setId(id);
 		vo.setPw(pw);
 		
-		String hashedPw = ojmDAO.getHashedPw(vo);
+		String hashedPw = OJMDAO.getHashedPw(vo);
 		if(hashedPw.equals("") || !BCrypt.checkpw(pw, hashedPw)) { //비번 틀릴경우
 			request.setAttribute("msg", msg);
 			doGet(request, response);
@@ -43,10 +45,10 @@ public class loginServlet extends HttpServlet {
 			
 			//로그인 성공 시 포인트를 획득함
 			//로그인 포인트는 하루에 한번만 받을 수 있음
-			ojmDAO.log(vo.getId(),"로그인"); //로그인시 로그들을 db에 저장
-			ojmDAO.logCheck(vo.getId()); //하루 최초 로그인 시 출석체크가 되는 메소드
+			OJMDAO.log(vo.getId(),"로그인"); //로그인시 로그들을 db에 저장
+			OJMDAO.logCheck(vo.getId()); //하루 최초 로그인 시 출석체크가 되는 메소드
 			
-			MemberVO userInfo = ojmDAO.getUserInfo(vo);
+			MemberVO userInfo = OJMDAO.getUserInfo(vo);
 			session.setAttribute("str", str);
 			session.setAttribute("userInfo", userInfo);
 			System.out.println(userInfo.getId());

@@ -1,23 +1,18 @@
-package com.koreait.lunch.controller;
+package com.koreait.lunch.my.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.koreait.lunch.model.ojmDAO;
-import com.koreait.lunch.model.board.BoardVO;
+import com.koreait.lunch.controller.MyUtils;
 
-@WebServlet("/ojm")
-public class MainServlet extends HttpServlet {
+@WebServlet("/ranking")
+public class RankingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.getNav(request);
-		request.setAttribute("list", ojmDAO.getAllBoard()); 
-		MyUtils.openJSP("ojm", request, response);
+		MyUtils.openJSP("my/ranking", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

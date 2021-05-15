@@ -1,4 +1,4 @@
-package com.koreait.lunch.controller.my;
+package com.koreait.lunch.my.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.koreait.lunch.model.ojmDAO;
-import com.koreait.lunch.model.member.MemberVO;
+import com.koreait.lunch.member.model.MemberVO;
+import com.koreait.lunch.model.OJMDAO;
 
 /**
  * Servlet implementation class FindIdServlet
@@ -26,7 +26,7 @@ public class FIndIdServelt extends HttpServlet {
 		//TODO : 이메일로 ID 찾아오는 SQL 문 작성
 		
 		// 이메일로 받아온 id 리스트 받아오기
-		List<String> idList = ojmDAO.selectIdList(memberVo);
+		List<String> idList = OJMDAO.selectIdList(memberVo);
 		request.setAttribute("idList",idList);
 		// 다시 findid.jsp 가기
 		
