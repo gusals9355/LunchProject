@@ -21,7 +21,7 @@ public class JoinServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MyUtils.openJSP("join", request, response);
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
@@ -33,6 +33,7 @@ public class JoinServlet extends HttpServlet {
 		
 		if(!pw.equals(pw2)) { //패스워드 일치 여부
 			doGet(request, response);
+			return;
 		}
 		String hashedPw = BCrypt.hashpw(pw, BCrypt.gensalt());
 		MemberVO bean = new MemberVO();
@@ -45,6 +46,7 @@ public class JoinServlet extends HttpServlet {
 		if(ojmDAO.insertMember(bean)) { //아이디 중복 검사
 			request.setAttribute("msg", msg);
 			doGet(request, response);
+			return;
 		}
 		response.sendRedirect("/ojm");
 		

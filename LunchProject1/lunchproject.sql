@@ -17,6 +17,7 @@ create table point(
 
 create table board(
 	no int auto_increment primary key,
+	store varchar(30) not null,
 	title varchar(30) not null,
 	content varchar(1000) not null,
 	id varchar(20) not null,

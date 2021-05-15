@@ -52,12 +52,13 @@
 		</div>
 	</div>
 </div>
-	<p id="result"> <!-- 위도 경도 정보 -->
-<c:forEach var="item" items="${list }" varStatus="status">
-	<input type="hidden" name="mapx" value="${item.mapX}">
-	<input type="hidden" name="mapy" value="${item.mapY}">
-	<input type="hidden" name="count" value="${status.count}">
-</c:forEach>
-<script src="/js/kakao.js"></script>
+	<p>
+	<c:forEach var="item" items="${list }" varStatus="status">
+		<input type="hidden" name="store" value="${item.store}">
+		<input type="hidden" name="mapX" value="${item.mapX}">
+		<input type="hidden" name="mapY" value="${item.mapY}">
+	</c:forEach>
+	</p>
+<script src="/js/list.js"></script>
 </body>
 </html>

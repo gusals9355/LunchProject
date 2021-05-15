@@ -69,8 +69,8 @@ public class ojmDAO {
 //			pictureList+=i+|;
 //		}
 		
-		String sql = "insert into board(title, content, id, pw, picture, star, category, mapX, mapY) "
-				+ "values(?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into board(title, content, id, pw, picture, star, category, mapX, mapY, store) "
+				+ "values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
@@ -82,6 +82,7 @@ public class ojmDAO {
 			pstmt.setString(7, vo.getCategory());
 			pstmt.setDouble(8, vo.getMapX());
 			pstmt.setDouble(9, vo.getMapY());
+			pstmt.setString(10, vo.getStore());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -234,6 +235,7 @@ public class ojmDAO {
 			while(rs.next()) {
 				BoardVO vo = new BoardVO();
 				vo.setNo(rs.getInt("no"));
+				vo.setStore(rs.getString("store"));
 				vo.setTitle(rs.getString("title"));
 				vo.setContent(rs.getString("content"));
 				vo.setId(rs.getString("id"));

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class BoardVO {
 	private int no;
+	private String store;
 	private String title;
 	private String content;
 	private String id;
@@ -17,6 +18,12 @@ public class BoardVO {
 	private double mapX;
 	private double mapY;
 	
+	public String getStore() {
+		return store;
+	}
+	public void setStore(String store) {
+		this.store = store;
+	}
 	public String getNickname() {
 		return nickname;
 	}

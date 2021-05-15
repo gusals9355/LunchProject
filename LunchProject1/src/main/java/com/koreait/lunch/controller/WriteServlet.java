@@ -44,7 +44,7 @@ public class WriteServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String savePath = request.getRealPath("upload"); //저장경로
-		String path = "C:\\Users\\Administrator\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
+		String path = "C:\\Users\\user\\git\\LunchProject\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
 		int sizeLimit = 1024*1024*15; //파일크기
 		
 		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, "utf-8", new DefaultFileRenamePolicy() /*중복이름 변경*/); 
@@ -53,12 +53,9 @@ public class WriteServlet extends HttpServlet {
 				//http://kaludin.egloos.com/v/2274255
 				String id=multi.getParameter("id"); // 폼태그 enctype속성이 있으면 일반적인 방법으로 값을 받을수 없음 개씨발
 				String pw=multi.getParameter("pw");
-				String title=multi.getParameter("title");
-				String content=multi.getParameter("content");
 				String star=multi.getParameter("star");
-				String category=multi.getParameter("category");
-				String mapX=multi.getParameter("lng");
-				String mapY=multi.getParameter("lat");
+				String mapX=multi.getParameter("lat");
+				String mapY=multi.getParameter("lng");
 				List<String> list = new ArrayList<String>();
 				while(files.hasMoreElements()) {
 					String fileInput = (String) files.nextElement();
@@ -69,10 +66,11 @@ public class WriteServlet extends HttpServlet {
 				BoardVO vo = new BoardVO();
 				vo.setId(id);
 				vo.setPw(BCrypt.hashpw(pw, BCrypt.gensalt()));
-				vo.setTitle(title);
-				vo.setContent(content);
+				vo.setStore(multi.getParameter("store"));
+				vo.setTitle(multi.getParameter("title"));
+				vo.setContent(multi.getParameter("content"));
 				vo.setStar(Integer.parseInt(star));
-				vo.setCategory(category);
+				vo.setCategory(multi.getParameter("category"));
 				vo.setMapX(Double.parseDouble(mapX));
 				vo.setMapY(Double.parseDouble(mapY));
 				vo.setPicture(list.get(0));

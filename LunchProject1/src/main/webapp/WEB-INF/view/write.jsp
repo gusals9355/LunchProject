@@ -68,8 +68,9 @@
 		</div>
 		<div class="col right_layout"> <!-- 오른쪽 레이아웃 (주 폼태그) -->
 			<form action="/write" method="post" enctype="multipart/form-data"> <!-- get방식 전송불가 -->
-				<input type="hidden" name="lng" id="lng">
+				<input type="hidden" name="store" id="placeName">
 				<input type="hidden" name="lat" id="lat">
+				<input type="hidden" name="lng" id="lng">
 				<input type="hidden" name="star" id="star">
 				<input type="hidden" name="category" id="foodType">
 				<c:if test="${userInfo eq null }">
