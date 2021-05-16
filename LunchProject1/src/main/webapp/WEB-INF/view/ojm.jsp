@@ -43,7 +43,7 @@
 					<button type="button" class="home btn btn-outline-warning" onclick="panTo()">Home</button>
 				</div>
 				<div class="col">
-					<button type="button" class="write btn btn-outline-warning" onclick="location.href='/write'">글 등록</button>
+					<button type="button" class="write btn btn-outline-warning" onclick="location.href='/board/write'">글 등록</button>
 				</div>
 			</div>
 		</div>
@@ -60,6 +60,6 @@
 		<input type="hidden" name="mapY" value="${item.mapY}">
 	</c:forEach>
 	</p>
-<script src="/js/list.js"></script>
+<script src="/js/ojm.js"></script>
 </body>
 </html>

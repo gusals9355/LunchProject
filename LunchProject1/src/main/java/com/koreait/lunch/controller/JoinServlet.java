@@ -2,7 +2,6 @@ package com.koreait.lunch.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import com.koreait.lunch.member.model.MemberDAO;
 import com.koreait.lunch.member.model.MemberVO;
-import com.koreait.lunch.model.OJMDAO;
 
-@WebServlet("/join")
+@WebServlet("/ojm/join")
 public class JoinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -43,7 +42,7 @@ public class JoinServlet extends HttpServlet {
 		bean.setPw(hashedPw);
 		bean.setGender(gender);
 		
-		if(OJMDAO.insertMember(bean)) { //아이디 중복 검사
+		if(MemberDAO.insertMember(bean)) { //아이디 중복 검사
 			request.setAttribute("msg", msg);
 			doGet(request, response);
 			return;

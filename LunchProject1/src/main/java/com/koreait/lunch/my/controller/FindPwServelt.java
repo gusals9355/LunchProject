@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.koreait.lunch.member.model.MemberVO;
-import com.koreait.lunch.model.OJMDAO;
+import com.koreait.lunch.model.DBUtils;
 
 @WebServlet("/findpw")
 public class FindPwServelt extends HttpServlet {
@@ -39,7 +39,7 @@ public class FindPwServelt extends HttpServlet {
 		memberVo.setPw(pw);
 		// dao 에서 해당하는 id의 email, name을 검사 후 pw 변경해주기
 		// 실제로는 휴대폰 인증 or 메일 인증등의 otp 체크를 통하여 검사하기
-		OJMDAO.updatePassword(memberVo);
+		DBUtils.updatePassword(memberVo);
 		
 		
 		// main페이지 or 로그인 페이지로 넘기기

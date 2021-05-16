@@ -10,9 +10,6 @@ import javax.servlet.http.HttpSession;
 import com.koreait.lunch.member.model.MemberVO;
 
 public class MyUtils {
-	public static void openJSP(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/"+jsp + ".jsp").forward(request, response);
-	}
 	
 	public static int parseStringToInt(String num) {
 		try {
@@ -27,23 +24,30 @@ public class MyUtils {
 	}
 	
 	public static void getNav(HttpServletRequest request) {
-		
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("str"));
-		if(session.getAttribute("userInfo") == null) {
-			String str = "nav.jsp";
-			session.setAttribute("str", str);
+		if(getLoginUser(request) == null) {
+			session.setAttribute("str", "nav.jsp");
+			return;
 		}
+		session.setAttribute("str", "loginNav.jsp");
 	}
 	
 	public static MemberVO getLoginUser(HttpServletRequest request) {
 		if(request == null) return null;
 		HttpSession hs = request.getSession();
-		return (MemberVO) hs.getAttribute("loginUser");
+		return (MemberVO) hs.getAttribute("userInfo");
 	}
 	
 	public static String getLoginUserID(HttpServletRequest request) {
 		return getLoginUser(request).getId();
+	}
+	
+	public static void logOutSession(HttpSession session) {
+		session.invalidate();
+	}
+	
+	public static void openJSP(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/view/"+jsp +".jsp").forward(request, response);
 	}
 	
 }

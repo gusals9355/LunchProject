@@ -11,7 +11,7 @@
 <title>글쓰기</title>
 </head>
 <body>
-<jsp:include page="nav/${str }" flush="false"/>
+<jsp:include page="../nav/${str }" flush="false"/>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965&libraries=services"></script>
 
 <div class="container">
@@ -67,14 +67,14 @@
 			</div>
 		</div>
 		<div class="col right_layout"> <!-- 오른쪽 레이아웃 (주 폼태그) -->
-			<form action="/write" method="post" enctype="multipart/form-data"> <!-- get방식 전송불가 -->
+			<form action="/board/write" method="post" enctype="multipart/form-data"> <!-- get방식 전송불가 -->
 				<input type="hidden" name="store" id="placeName">
 				<input type="hidden" name="lat" id="lat">
 				<input type="hidden" name="lng" id="lng">
 				<input type="hidden" name="star" id="star">
 				<input type="hidden" name="category" id="foodType">
-				<c:if test="${userInfo eq null }">
-					<div class="row"> <!-- id,pw -->
+				<!--<c:if test="${userInfo eq null }">
+					<div class="row"> 
 						<div class="col">
 							<input type="text" name="id" value="${anonymous }" placeholder="아이디" maxlength="20" required>
 						</div>
@@ -82,12 +82,11 @@
 							<input type="password" name="pw" placeholder="비밀번호" maxlength="20" required>
 						</div>
 					</div>
-				</c:if>
+				</c:if>!-->
 				<div>
 					<input type="text" name="title" maxlength="30" placeholder="제목" size="60" autofocus required>
 				</div>
 				<div class="danger-log"> <!-- danger log -->
-					<p><strong>※ 쉬운 비밀번호를 입력하면 타인의 수정, 삭제가 쉽습니다.</strong></p>
 					<p><strong>※ 무분별한 게시글은 관리자에 의해 삭제될 수 있습니다.</strong></p>
 				</div>
 				<div>

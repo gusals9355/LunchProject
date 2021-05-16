@@ -84,9 +84,6 @@ function setStar(i) {
 	}
 }
 
-function getStar(){
-	
-}
 function drawStar(n){
 	var iArr = document.getElementsByClassName('star');
 	var iArrCnt = 0;
