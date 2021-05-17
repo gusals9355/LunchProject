@@ -101,7 +101,7 @@
 						</div>
 					</div>
 					<div class="col"> <!-- 등록 -->
-						<button type="button" class="cancel btn btn-secondary" onclick="">취소</button>
+						<button type="button" class="cancel btn btn-secondary" onclick="againCheck('ojm','취소')">취소</button>
 					</div>
 					<div class="col">
 						<input type="submit" class="submit btn btn-success" value="등록">

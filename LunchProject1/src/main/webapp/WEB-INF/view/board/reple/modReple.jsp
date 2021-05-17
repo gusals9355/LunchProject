@@ -1,12 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<!-- <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/boot/bootstrap.css"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<title>${boards.title}</title>
 </head>
 <body>
-
+<jsp:include page="../../nav/${str}" flush="false"/>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965&libraries=services"></script>
+<div class="container">
+	<div class="row layout">
+	
+		<div class="col left_layout"> <!-- 왼쪽 레이아웃 -->
+			<div class="map_wrap"> <!-- 지도블럭 -->
+				<div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
+				<div id="menu_wrap" class="bg_white"> 
+					<div class="option"></div>
+					<ul id="placesList"></ul>
+					<div id="pagination"></div>
+				</div>
+			</div>
+			<div class="row"> <!-- 하단블럭 -->
+				<p class="msg">${msg }</p>
+				<div class="col category-div dropdown"> <!-- 카테고리 -->
+					<button class="btn btn-secondary disabled" type="button" id="food">${boards.category }</button>
+				</div>
+				<div class="col star-div dropdown"><!-- 평점 -->
+					<button class="btn btn-secondary disabled" type="button" id="stars">${boards.star }</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col right_layout"> <!-- 오른쪽 레이아웃 (주 폼태그) -->
+			<div>
+				${boards.title }
+			</div>
+			<div class="danger-log"> <!-- danger log -->
+				<p><strong>danger-log</strong></p>
+			</div>
+			<div>
+				${boards.content }
+				<hr>
+				<c:forEach var="item" items="${reples }">
+					<div>
+						<c:choose>
+							<c:when test="${item.no == repleNo}">
+								<form action="/board/modReple?no=${param.no }&repleNo=${item.no}" method="post">
+									<input type="text" name="reple" value="${item.reple }">
+									<input type="text" name="star" value="${item.star }" size="1" maxlength="1">
+									<button type="button" class="cancel btn btn-secondary" onclick="goPage('board/views?no=${param.no}')">취소</button>
+									<input type="submit" class="modify btn btn-info" value="수정">
+								</form>
+							</c:when>
+							<c:otherwise>
+								${item.nickname } ${item.reple } ${item.star } ${item.reg_dt }
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<hr>
+				</c:forEach>
+				
+				<form action="/board/views?no=${param.no }" method="post">
+					<div>
+						<input type="text" name="reple" maxlength="500" size="50" value="${no }">
+						<input type="text" name="star" maxlength="1" size="1" value="${repleNo }">
+						<input type="submit" class="btn btn-success" value="등록" style="width: 50px"></input>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/js/common.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@ create table member(
 	name varchar(10) not null,
 	nickname varchar(10) not null,
 	email varchar(50) not null,
-	gender char(1) check(gender in('M','F')) not null,
+	gender char(1) not null check(gender in('M','F')),
 	id varchar(20) primary key,
 	pw char(60) not null,
 	point int default 0,
@@ -37,11 +37,12 @@ create table log(
 
 create table reple(
 	no int unsigned auto_increment primary key,
-	boardno int unsigned not null,
-	id varchar(20) not null,
+	boardno int unsigned,
+	id varchar(20),
 	nickname varchar(10) not null,
 	reple varchar(500) not null,
 	reg_dt datetime default now(),
 	star int(1),
-	foreign key(boardno) references board(no)
+	foreign key(boardno) references board(no),
+	foreign key(id) references member(id)
 );

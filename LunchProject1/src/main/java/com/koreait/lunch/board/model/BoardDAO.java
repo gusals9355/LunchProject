@@ -22,19 +22,20 @@ public class BoardDAO {
 //		for (String i : vo.getPicture()) { //다중 파일이 업로드될때 구분자를 주기 위한 문장
 //			pictureList+=i+|;
 //		}
-		final String sql = "insert into board(title, content, id, picture, star, category, mapX, mapY, store) "
-				+ "values(?,?,?,?,?,?,?,?,?)";
+		final String sql = "insert into board(title, content, id, nickname, picture, star, category, mapX, mapY, store) "
+				+ "values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
 			pstmt.setString(3, vo.getId());
-			pstmt.setString(4, vo.getPicture());
-			pstmt.setInt(5, vo.getStar());
-			pstmt.setString(6, vo.getCategory());
-			pstmt.setDouble(7, vo.getMapX());
-			pstmt.setDouble(8, vo.getMapY());
-			pstmt.setString(9, vo.getStore());
+			pstmt.setString(4, vo.getNickname());
+			pstmt.setString(5, vo.getPicture());
+			pstmt.setInt(6, vo.getStar());
+			pstmt.setString(7, vo.getCategory());
+			pstmt.setDouble(8, vo.getMapX());
+			pstmt.setDouble(9, vo.getMapY());
+			pstmt.setString(10, vo.getStore());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,5 +113,46 @@ public class BoardDAO {
 			DBUtils.close(con);
 		}
 	}
+	
+	public static void delBoard(int boardNo, String id) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql = "delete from board where no = ? and id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+	}
+	
+	//TODO: 사진, map까지 수정
+	public static void modBoard(int no, String id, RepleVO vo) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql = "update board set title = ?, content = ?, category = ?, star = ?, reg_dt = now() where no = ? and id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, vo.getReple());
+			pstmt.setInt(2, vo.getStar());
+			pstmt.setInt(3, no);
+			pstmt.setString(4, id);
+			pstmt.setInt(5, vo.getNo());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+	}
+	
 	
 }

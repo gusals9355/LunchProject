@@ -14,14 +14,15 @@ import com.koreait.lunch.board.reple.model.RepleDAO;
 import com.koreait.lunch.controller.MyUtils;
 
 @WebServlet("/board/views")
-public class ViewsServlet extends HttpServlet {
+public class BoardViewsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(MyUtils.getLoginUser(request) == null) {
 			response.sendRedirect("/ojm/login");
 			return;
 		}
-		request.setAttribute("board", BoardDAO.getBoard(MyUtils.getParamInt("no", request)));
-		request.setAttribute("reple", RepleDAO.getReple(MyUtils.getParamInt("no", request)));
+		request.setAttribute("boards", BoardDAO.getBoard(MyUtils.getParamInt("no", request)));
+		request.setAttribute("reples", RepleDAO.getReples(MyUtils.getParamInt("no", request)));
+		request.setAttribute("selRepleNo", request.getParameter("repleNo"));
 		MyUtils.openJSP("board/views", request, response);
 	}
 

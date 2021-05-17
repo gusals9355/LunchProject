@@ -34,12 +34,12 @@ public class RepleDAO {
 		}
 	}
 	
-	public static List<RepleVO> getReple(int boardNo) {
+	public static List<RepleVO> getReples(int boardNo) {
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		
 		List<RepleVO> list = new ArrayList<RepleVO>();
-		final String sql = "select * from reple where boardno = ? order by reg_dt desc";
+		final String sql = "select * from reple where boardno = ? order by no desc";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -87,7 +87,7 @@ public class RepleDAO {
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		
-		final String sql = "update reple set reple = ?, star = ? where no = ? and id = ?";
+		final String sql = "update reple set reple = ?, star = ?, reg_dt = now() where boardno = ? and id = ? and no = ?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -95,6 +95,7 @@ public class RepleDAO {
 			pstmt.setInt(2, vo.getStar());
 			pstmt.setInt(3, no);
 			pstmt.setString(4, id);
+			pstmt.setInt(5, vo.getNo());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
