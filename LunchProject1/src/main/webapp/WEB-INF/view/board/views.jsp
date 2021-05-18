@@ -71,7 +71,7 @@
 						<button type="button" class="cancel btn btn-secondary" onclick="againCheck('board/delBoard?no=${param.no}','삭제')">삭제</button>
 					</div>
 					<div class="col">
-						<button type="button" class="modify btn btn-info" onclick="??">수정</button>
+						<button type="button" class="modify btn btn-info" onclick="goPage('board/modBoard?no=${param.no}')">수정</button>
 					</div>
 				</div>
 			</c:if>

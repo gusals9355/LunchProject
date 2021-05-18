@@ -133,19 +133,23 @@ public class BoardDAO {
 	}
 	
 	//TODO: 사진, map까지 수정
-	public static void modBoard(int no, String id, RepleVO vo) {
+	public static void modBoard(int no, String id, BoardVO vo) {
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		
-		final String sql = "update board set title = ?, content = ?, category = ?, star = ?, reg_dt = now() where no = ? and id = ?";
+		final String sql = "update board set title = ?, content = ?, picture = ?, star=?, category = ?, reg_dt = now(),"
+				+ " mapX=?,mapY=? where no = ? and id = ?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getReple());
-			pstmt.setInt(2, vo.getStar());
-			pstmt.setInt(3, no);
-			pstmt.setString(4, id);
-			pstmt.setInt(5, vo.getNo());
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getPicture());
+			pstmt.setInt(4, vo.getStar());
+			pstmt.setString(5, vo.getCategory());
+			pstmt.setDouble(6, vo.getMapX());
+			pstmt.setDouble(7, vo.getMapY());
+			pstmt.setString(8, id);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
