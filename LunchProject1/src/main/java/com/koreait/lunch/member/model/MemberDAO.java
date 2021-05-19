@@ -37,14 +37,14 @@ public class MemberDAO {
 		return verify;
 	}
 	
-	public static String getHashedPw(MemberVO vo) { //패스워드 확인
+	public static String getHashedPw(String id) { //패스워드 확인
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		String hashPW = "";
 		final String sql = "select pw from member where id = ?";
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getId());
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) { //로그인 성공한다면
 				hashPW = rs.getString(1); //db에 있는 암호화 된 값
@@ -58,7 +58,54 @@ public class MemberDAO {
 		}
 	}
 	
-	public static MemberVO getUserInfo(MemberVO vo) {
+	public static int getBoardCount(String id) { //패스워드 확인
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		int count=0;
+		final String sql = "select count(*) from member where id = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+		return count;
+	}
+	
+	public static List<MemberVO> getRanking() {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		final String sql = "select nickname, ranked, id, point, reg_dt from member order by point desc";
+		
+		try {
+			pstmt= con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				MemberVO vo = new MemberVO();
+				vo.setNickName(rs.getString(1));
+				vo.setRank(rs.getString(2));
+				vo.setId(rs.getString(3));
+				vo.setPoint(rs.getString(4));
+				vo.setReg_dt(rs.getString(5));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+		return list;
+	}
+	
+	public static MemberVO getUserInfo(String id) {
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		MemberVO userInfo = new MemberVO();
@@ -66,10 +113,11 @@ public class MemberDAO {
 		
 		try {
 			pstmt= con.prepareStatement(sql);
-			pstmt.setString(1, vo.getId());
+			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				userInfo.setId(rs.getString("id"));
+				userInfo.setRank(rs.getString("ranked"));
 				userInfo.setGender(rs.getString("gender"));
 				userInfo.setName(rs.getString("name"));
 				userInfo.setEmail(rs.getString("email"));
@@ -101,8 +149,8 @@ public class MemberDAO {
 			while(rs.next()) {
 				idList.add(rs.getString(1));
 			}
-			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}finally {
 			DBUtils.close(con);
 		}
@@ -162,8 +210,8 @@ public class MemberDAO {
 					pstmt = con.prepareStatement(sql2);
 					pstmt.setString(1, id);
 					if(pstmt.executeUpdate() == 1) {
-						int point = 25; //로그인 포인트
-						final String sql3 = "update member set point=point+"+point+" where id = ?";
+						final int loginPoint = 100; //로그인 포인트
+						final String sql3 = "update member set point=point+"+loginPoint+" where id = ?";
 						pstmt= con.prepareStatement(sql3);
 						pstmt.setString(1, id);
 						pstmt.executeUpdate();
@@ -176,5 +224,43 @@ public class MemberDAO {
 			DBUtils.close(con);
 		}
 	}
+	
+	public static void editNick(String nickname, String id) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql = "update member set nickname=? where id=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickname);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+	}
+	
+	public static void setPoint(String id, String sign) {
+		int count = getBoardCount(id);
+		final int writePoint = 25;
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql = "update member set point=point"+sign+"? where id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, writePoint);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+	}
+	
 	
 }

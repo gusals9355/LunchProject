@@ -6,25 +6,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import com.koreait.lunch.controller.MyUtils;
 import com.koreait.lunch.member.model.MemberDAO;
-import com.koreait.lunch.member.model.MemberVO;
 
-
-@WebServlet("/editNickName")
-public class EditNickNameServlet extends HttpServlet {
+@WebServlet("/user/pwCheck")
+public class PwCheckServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.openJSP("my/editNickName", request, response);
+		MyUtils.openJSP("my/pwCheck", request, response);
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		MemberDAO.editNick(request.getParameter("nickname"), MyUtils.getLoginUserID(request));
-		
-		session.setAttribute("userInfo", MemberDAO.getUserInfo(MyUtils.getLoginUserID(request)));
-		response.sendRedirect("/ojm");
+		if(BCrypt.checkpw(request.getParameter("pw"), MemberDAO.getHashedPw(request.getParameter("id")))) {
+			response.sendRedirect("/mypage");
+			return;
+		}
+		request.setAttribute("msg", "비밀번호를 다시 확인해주세요.");
+		doGet(request, response);
 	}
 
 }

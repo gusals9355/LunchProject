@@ -27,22 +27,22 @@
 				가입날짜
 			</div>
 		</div>
-		<c:forEach var="i" begin="1" end="15">
+		<c:forEach var="i" items="${rankingList }" varStatus="status">
 			<div class="row">
 				<div class="mybox col-1">
-					${i }
+					${status.count }
 				</div>
 				<div class="mybox col-3">
-					id
+					${i.nickName }(${i.id })
 				</div>
 				<div class="mybox col-2">
-					등급
+					${i.rank }
 				</div>
 				<div class="mybox col-2">
-					포인트
+					${i.point }
 				</div>
 				<div class="mybox col-4">
-					가입날짜
+					${i.reg_dt }
 				</div>
 			</div>
 		</c:forEach>

@@ -27,25 +27,6 @@
 				가입날짜
 			</div>
 		</div>
-		<c:forEach var="i" begin="1" end="15">
-			<div class="row">
-				<div class="mybox col-1">
-					${i }
-				</div>
-				<div class="mybox col-3">
-					id
-				</div>
-				<div class="mybox col-2">
-					등급
-				</div>
-				<div class="mybox col-2">
-					포인트
-				</div>
-				<div class="mybox col-4">
-					가입날짜
-				</div>
-			</div>
-		</c:forEach>
 	</div>
 </body>
 </html>

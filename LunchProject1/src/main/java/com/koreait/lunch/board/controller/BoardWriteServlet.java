@@ -11,12 +11,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.koreait.lunch.board.model.BoardDAO;
 import com.koreait.lunch.board.model.BoardVO;
 import com.koreait.lunch.controller.MyUtils;
+import com.koreait.lunch.member.model.MemberDAO;
+import com.koreait.lunch.member.model.MemberVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -47,8 +50,9 @@ public class BoardWriteServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		//String savePath = request.getRealPath("upload"); //저장경로
-		final String path = "C:\\Users\\Administrator\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
+		final String path = "C:\\\\Users\\\\user\\\\git\\\\LunchProject\\\\LunchProject1\\\\src\\\\main\\\\webapp\\\\upload"; //저장경로
 		final int sizeLimit = 1024*1024*15; //파일크기
 		
 		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, "utf-8", new DefaultFileRenamePolicy() /*중복이름 변경*/); 
@@ -78,6 +82,8 @@ public class BoardWriteServlet extends HttpServlet {
 			vo.setMapY(Double.parseDouble(mapY));
 			vo.setPicture(list.get(0));
 			BoardDAO.insertBoard(vo);
+			MemberDAO.setPoint(MyUtils.getLoginUserID(request), "+");
+			MyUtils.reUserInfo(request); //유저 정보를 다시 가져옴
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("msg", "카테고리 혹은 평점, 매장을 선택 해주세요.");
@@ -85,6 +91,7 @@ public class BoardWriteServlet extends HttpServlet {
 			doGet(request, response);
 			return;
 		}
+		
 		response.sendRedirect("/ojm");
 	}
 

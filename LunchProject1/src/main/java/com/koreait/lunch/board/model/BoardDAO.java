@@ -138,7 +138,7 @@ public class BoardDAO {
 		con = DBUtils.getCon(con);
 		
 		final String sql = "update board set title = ?, content = ?, picture = ?, star=?, category = ?, reg_dt = now(),"
-				+ " mapX=?,mapY=? where no = ? and id = ?";
+				+ " mapX=?,mapY=?, store=? where no = ? and id = ?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -149,7 +149,9 @@ public class BoardDAO {
 			pstmt.setString(5, vo.getCategory());
 			pstmt.setDouble(6, vo.getMapX());
 			pstmt.setDouble(7, vo.getMapY());
-			pstmt.setString(8, id);
+			pstmt.setString(8, vo.getStore());
+			pstmt.setDouble(9, vo.getNo());
+			pstmt.setString(10, id);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

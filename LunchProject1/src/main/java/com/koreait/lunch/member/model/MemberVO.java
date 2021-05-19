@@ -8,7 +8,21 @@ public class MemberVO {
 	private String id;
 	private String pw;
 	private String point;
+	private String rank;
+	private String reg_dt;
 	
+	public String getRank() {
+		return rank;
+	}
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+	public String getReg_dt() {
+		return reg_dt;
+	}
+	public void setReg_dt(String reg_dt) {
+		this.reg_dt = reg_dt;
+	}
 	public String getPoint() {
 		return point;
 	}

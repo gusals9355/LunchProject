@@ -20,10 +20,10 @@
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	      </ul>
 	  		<div class="btn-group" role="group" aria-label="First group">
-			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('/editNickName')">${userInfo.nickName }님</button>
-			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('/rank')">등급</button>
-			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('/ranking')">랭킹</button>
-			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('/mypage')">내정보</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('editNickName')">${userInfo.nickName }님</button>
+			    <button type="button" class="btn btn-outline-secondary">${userInfo.rank }</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('ranking')">랭킹</button>
+			    <button type="button" class="btn btn-outline-secondary" onclick="goPage('user/pwCheck')">내정보</button>
 			    <button type="button" class="btn btn-outline-secondary"><fmt:formatNumber groupingUsed="true" value="${userInfo.point}"/>xp </button>
 	  		</div>
 	      <form class="d-flex" action="/logout" method="post">

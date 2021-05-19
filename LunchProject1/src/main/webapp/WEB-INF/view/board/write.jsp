@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/boot/bootstrap.css"> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<link rel="stylesheet" href="css/write.css">
+<link rel="stylesheet" href="/css/write.css">
 <title>글쓰기</title>
 </head>
 <body>
@@ -19,13 +19,14 @@
 		<div class="col left_layout"> <!-- 왼쪽 레이아웃 -->
 			<div class="search_store"> <!-- 검색블럭 -->
 				<form onsubmit="searchPlaces(); return false;">
-					<label>매장찾기 : <input type="text" value="코리아it아카데미" id="keyword" size="40"></label> 
+					<label>매장찾기 : <input type="text" id="keyword" size="40"></label> 
 					<button type="submit" style="display: none;">검색하기</button> 
+					<p id="markerMsg"></p>
 				</form>
 			</div>
 			
 			<div class="map_wrap"> <!-- 지도블럭 -->
-				<div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
+				<div id="map" style="height:400px;position:relative;overflow:hidden;"></div>
 				<div id="menu_wrap" class="bg_white"> 
 					<div class="option"></div>
 					<ul id="placesList"></ul>
@@ -84,7 +85,7 @@
 					</div>
 				</c:if>!-->
 				<div>
-					<input type="text" name="title" maxlength="30" placeholder="제목" size="60" autofocus required>
+					<input type="text" name="title" value="${param.title}" maxlength="30" placeholder="제목" size="60" autofocus required>
 				</div>
 				<div class="danger-log"> <!-- danger log -->
 					<p><strong>※ 무분별한 게시글은 관리자에 의해 삭제될 수 있습니다.</strong></p>

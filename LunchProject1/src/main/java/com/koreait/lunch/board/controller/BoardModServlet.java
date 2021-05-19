@@ -28,7 +28,7 @@ public class BoardModServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String path = "C:\\Users\\Administrator\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
+		final String path = "C:\\Users\\user\\git\\LunchProject\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
 		final int sizeLimit = 1024*1024*15; //파일크기
 		
 		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, "utf-8", new DefaultFileRenamePolicy() /*중복이름 변경*/); 
@@ -36,6 +36,7 @@ public class BoardModServlet extends HttpServlet {
 		try {
 			//http://kaludin.egloos.com/v/2274255
 			// 폼태그 enctype속성이 있으면 일반적인 방법으로 값을 받을수 없음 개씨발
+			String no = multi.getParameter("no");
 			String star=multi.getParameter("star");
 			String mapX=multi.getParameter("lat");
 			String mapY=multi.getParameter("lng");
@@ -47,6 +48,7 @@ public class BoardModServlet extends HttpServlet {
 				list.add(picture);
 			}
 			BoardVO vo = new BoardVO();
+			vo.setNo(MyUtils.parseStringToInt(no));
 			vo.setId(MyUtils.getLoginUserID(request));
 			vo.setNickname(MyUtils.getLoginUser(request).getNickName());
 			vo.setStore(multi.getParameter("store"));
@@ -57,6 +59,9 @@ public class BoardModServlet extends HttpServlet {
 			vo.setMapX(Double.parseDouble(mapX));
 			vo.setMapY(Double.parseDouble(mapY));
 			vo.setPicture(list.get(0));
+			System.out.println(multi.getParameter("store"));
+			System.out.println(mapX);
+			System.out.println(mapY);
 			
 			BoardDAO.modBoard(MyUtils.getParamInt("no", request), MyUtils.getLoginUserID(request), vo);
 		} catch (Exception e) {
@@ -66,7 +71,7 @@ public class BoardModServlet extends HttpServlet {
 			doGet(request, response);
 			return;
 		}
-		response.sendRedirect("/ojm");
+		response.sendRedirect("/board/views?no="+MyUtils.parseStringToInt(multi.getParameter("no")));
 	}
 
 }

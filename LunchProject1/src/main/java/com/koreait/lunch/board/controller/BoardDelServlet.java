@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.koreait.lunch.board.model.BoardDAO;
 import com.koreait.lunch.board.reple.model.RepleDAO;
 import com.koreait.lunch.controller.MyUtils;
+import com.koreait.lunch.member.model.MemberDAO;
 
 @WebServlet("/board/delBoard")
 public class BoardDelServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardDAO.delBoard(MyUtils.getParamInt("no", request), MyUtils.getLoginUserID(request));
+		MemberDAO.setPoint(MyUtils.getLoginUserID(request), "-");
+		MyUtils.reUserInfo(request);
 		response.sendRedirect("/ojm");
 	}
 }

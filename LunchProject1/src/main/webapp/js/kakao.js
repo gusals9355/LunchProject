@@ -41,9 +41,9 @@ function searchPlaces() {
     var keyword = document.getElementById('keyword').value;
 
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
         return false;
     }
+	
 
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     ps.keywordSearch( home+keyword, placesSearchCB); 
@@ -56,6 +56,7 @@ function placesSearchCB(data, status, pagination) {
         // 정상적으로 검색이 완료됐으면
         // 검색 목록과 마커를 표출합니다
         displayPlaces(data);
+		document.getElementById('markerMsg').innerHTML="▼▼▼해당 마커를 클릭해주세요!▼▼▼"; 
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
@@ -78,7 +79,8 @@ function displayPlaces(places) {
     fragment = document.createDocumentFragment(), 
     bounds = new kakao.maps.LatLngBounds(), 
     listStr = '';
-
+	
+	
     // 검색 결과 목록에 추가된 항목들을 제거합니다
     removeAllChildNods(listEl);
 

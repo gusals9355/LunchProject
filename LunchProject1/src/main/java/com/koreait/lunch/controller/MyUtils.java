@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.koreait.lunch.member.model.MemberDAO;
 import com.koreait.lunch.member.model.MemberVO;
 
 public class MyUtils {
@@ -48,6 +49,11 @@ public class MyUtils {
 	
 	public static void openJSP(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/view/"+jsp +".jsp").forward(request, response);
+	}
+	
+	public static void reUserInfo(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("userInfo", MemberDAO.getUserInfo(MyUtils.getLoginUserID(request)));
 	}
 	
 }

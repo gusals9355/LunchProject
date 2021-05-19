@@ -6,6 +6,7 @@ create table member(
 	id varchar(20) primary key,
 	pw char(60) not null,
 	point int default 0,
+	ranked char(10) default '소식가',
 	reg_dt datetime default now()
 );
 

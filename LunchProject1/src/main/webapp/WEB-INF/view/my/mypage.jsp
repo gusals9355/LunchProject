@@ -12,18 +12,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="mybox col">
-					1123
+					<h3>비밀번호 변경</h3>
+					<p>주기적으로 비밀번호를 변경하여 계정을 보호하세요.</p>
+					<button type="button" class="btn btn-danger">비밀번호 변경</button>
 				</div>
 				<div class="mybox col">
-					2
-				</div>
-			</div>
-			<div class="row">
-				<div class="mybox col">
-					3
-				</div>
-				<div class="mybox col">
-					4
+					<h3>정말 탈퇴하시겠습니까?</h3>
+					<p>탈퇴 시 기존의 정보들이 절대 복구 되지 않습니다.</p>
+					<button type="button" class="btn btn-danger" onclick="againCheck">탈퇴하기</button>
 				</div>
 			</div>
 		</div>

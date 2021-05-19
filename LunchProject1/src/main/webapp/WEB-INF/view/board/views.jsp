@@ -11,18 +11,12 @@
 </head>
 <body>
 <jsp:include page="../nav/${str}" flush="false"/>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05a3bed3cf436895037eb617468dc965&libraries=services"></script>
 <div class="container">
 	<div class="row layout">
 	
 		<div class="col left_layout"> <!-- 왼쪽 레이아웃 -->
-			<div class="map_wrap"> <!-- 지도블럭 -->
-				<div id="map" style="width:500px;height:400px;position:relative;overflow:hidden;"></div>
-				<div id="menu_wrap" class="bg_white"> 
-					<div class="option"></div>
-					<ul id="placesList"></ul>
-					<div id="pagination"></div>
-				</div>
+			<div class="imageBlock"> <!-- 사진블럭 -->
+				<img src="../../../upload/${boards.picture}" onerror="this.src='../../../upload/noImage.gif';" width="550" height="300">
 			</div>
 			<div class="row"> <!-- 하단블럭 -->
 				<p class="msg">${msg }</p>
@@ -30,7 +24,11 @@
 					<button class="btn btn-secondary disabled" type="button" id="food">${boards.category }</button>
 				</div>
 				<div class="col star-div dropdown"><!-- 평점 -->
-					<button class="btn btn-secondary disabled" type="button" id="stars">${boards.star }</button>
+					<button class="btn btn-secondary disabled" type="button" id="stars">
+						<c:forEach begin="1" end="${boards.star }">
+							<i class="bi bi-star-fill"></i>
+						</c:forEach>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -48,13 +46,14 @@
 				<c:forEach var="item" items="${reples }">
 					<div>
 						${item.nickname } ${item.reple } ${item.star } ${item.reg_dt }
-						
+						<!-- 댓글 삭제 등록-->
 						<c:if test="${userInfo.id == item.id }">
 							<button type="button" class="cancel btn btn-secondary" onclick="againCheck('board/delReple?no=${param.no}&repleNo=${item.no}','삭제')">삭제</button>
 							<button type="button" class="modify btn btn-info" onclick="goPage('board/modReple?no=${param.no}&repleNo=${item.no}')">수정</button>
 						</c:if>
 					</div>
 				</c:forEach>
+				
 				
 				<form action="/board/views?no=${param.no }" method="post">
 					<div>
@@ -65,6 +64,7 @@
 				</form>
 			</div>
 			
+			<!-- 글 삭제 등록 -->
 			<c:if test="${userInfo.id == boards.id }">
 				<div class="row"> <!-- 하단 블럭 -->
 					<div class="col"> <!-- 등록 -->
