@@ -44,6 +44,23 @@ public class BoardDAO {
 		}
 	}
 	
+	public static void insertHeart(int no, String id) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql = "insert into favorite(no, id) values(?,?)";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtils.close(con);
+		}
+	}
+	
 	public static List<BoardVO> getAllBoard(){
 		Connection con = null;
 		con = DBUtils.getCon(con);
@@ -79,16 +96,21 @@ public class BoardDAO {
 	}
 	
 	
-	public static BoardVO getBoard(int no) {
+	public static BoardVO getBoard(int no, String id) {
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		
 		BoardVO vo = null;
-		final String sql = "select * from board where no = ?";
+		final String sql = "select B.*, if(F.no is null, 0,1) as isFav from board B "
+				+ "left join favorite F "
+				+ "on B.no = F.no "
+				+ "and F.id = ? "
+				+ "where B.no=?;";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, no);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, no);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				vo = new BoardVO();
@@ -104,6 +126,7 @@ public class BoardDAO {
 				vo.setCategory(rs.getString("category"));
 				vo.setMapX(rs.getDouble("mapX"));
 				vo.setMapY(rs.getDouble("mapY"));
+				vo.setIsFav(rs.getInt("isFav"));
 			}
 			return vo;
 		} catch (Exception e) {
@@ -128,6 +151,23 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			DBUtils.close(con);
+		}
+	}
+	
+	public static void removeHeart(int no, String id) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql = "delete from favorite where no=? and id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
 			DBUtils.close(con);
 		}
 	}

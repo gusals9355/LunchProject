@@ -52,7 +52,7 @@ public class BoardWriteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		//String savePath = request.getRealPath("upload"); //저장경로
-		final String path = "C:\\\\Users\\\\user\\\\git\\\\LunchProject\\\\LunchProject1\\\\src\\\\main\\\\webapp\\\\upload"; //저장경로
+		final String path = "C:\\Users\\Administrator\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
 		final int sizeLimit = 1024*1024*15; //파일크기
 		
 		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, "utf-8", new DefaultFileRenamePolicy() /*중복이름 변경*/); 

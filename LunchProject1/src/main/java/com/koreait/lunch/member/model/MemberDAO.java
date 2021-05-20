@@ -225,6 +225,23 @@ public class MemberDAO {
 		}
 	}
 	
+	public static void removeUser(String id) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql ="delete from member where id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtils.close(con);
+		}
+	}
+	
 	public static void editNick(String nickname, String id) {
 		Connection con = null;
 		con = DBUtils.getCon(con);

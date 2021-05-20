@@ -20,8 +20,9 @@ public class BoardViewsServlet extends HttpServlet {
 			response.sendRedirect("/ojm/login");
 			return;
 		}
-		request.setAttribute("boards", BoardDAO.getBoard(MyUtils.getParamInt("no", request)));
-		request.setAttribute("reples", RepleDAO.getReples(MyUtils.getParamInt("no", request)));
+		int no = MyUtils.getParamInt("no", request);
+		request.setAttribute("boards", BoardDAO.getBoard(no,MyUtils.getLoginUserID(request)));
+		request.setAttribute("reples", RepleDAO.getReples(no));
 		request.setAttribute("selRepleNo", request.getParameter("repleNo"));
 		MyUtils.openJSP("board/views", request, response);
 	}

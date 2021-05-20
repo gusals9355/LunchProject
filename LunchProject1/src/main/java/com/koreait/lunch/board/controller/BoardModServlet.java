@@ -22,13 +22,13 @@ public class BoardModServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final String[] typelist = {"한식","양식","일식","중식","분식","카페","기타"};
 		request.setAttribute("typelist",typelist);
-		request.setAttribute("board", BoardDAO.getBoard(MyUtils.getParamInt("no", request)));
+		request.setAttribute("board", BoardDAO.getBoard(MyUtils.getParamInt("no", request),MyUtils.getLoginUserID(request)));
 		
 		MyUtils.openJSP("board/modBoard", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String path = "C:\\Users\\user\\git\\LunchProject\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
+		final String path = "C:\\Users\\Administrator\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
 		final int sizeLimit = 1024*1024*15; //파일크기
 		
 		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, "utf-8", new DefaultFileRenamePolicy() /*중복이름 변경*/); 

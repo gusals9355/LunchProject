@@ -20,7 +20,7 @@ public class RepleModServlet extends HttpServlet {
 			response.sendRedirect("/ojm/login");
 			return;
 		}
-		request.setAttribute("boards", BoardDAO.getBoard(MyUtils.getParamInt("no", request)));
+		request.setAttribute("boards", BoardDAO.getBoard(MyUtils.getParamInt("no", request),MyUtils.getLoginUserID(request)));
 		request.setAttribute("reples", RepleDAO.getReples(MyUtils.getParamInt("no", request)));
 		request.setAttribute("repleNo", request.getParameter("repleNo")); //seta안하면 안넘어가네
 		

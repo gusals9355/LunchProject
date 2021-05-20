@@ -27,6 +27,15 @@ create table board(
 	foreign key(id) references member(id)
 );
 
+create table favorite(
+	no int unsigned,
+	id varchar(20),
+	reg_dt datetime default now(),
+	primary key(id, no),
+	foreign key(no) references board(no),
+	foreign key(id) references member(id)
+);
+
 create table log(
 	no int unsigned auto_increment primary key,
 	id varchar(20),
@@ -44,6 +53,6 @@ create table reple(
 	reple varchar(500) not null,
 	reg_dt datetime default now(),
 	star int(1),
-	foreign key(boardno) references board(no),
+	foreign key(boardno) references board(no) on delete cascade,
 	foreign key(id) references member(id)
 );
