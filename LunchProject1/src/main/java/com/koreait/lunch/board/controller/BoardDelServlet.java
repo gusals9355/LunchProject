@@ -16,6 +16,10 @@ import com.koreait.lunch.member.model.MemberDAO;
 public class BoardDelServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(MyUtils.getLoginUser(request) == null) {
+			response.sendRedirect("/ojm/login");
+			return;
+		}
 		BoardDAO.delBoard(MyUtils.getParamInt("no", request), MyUtils.getLoginUserID(request));
 		MemberDAO.setPoint(MyUtils.getLoginUserID(request), "-");
 		MyUtils.reUserInfo(request);

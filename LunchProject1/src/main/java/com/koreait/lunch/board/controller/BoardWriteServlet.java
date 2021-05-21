@@ -45,14 +45,13 @@ public class BoardWriteServlet extends HttpServlet {
 //			ipAddress=inetAddress.getHostAddress();
 //		}
 //		request.setAttribute("ipAddress", ipAddress);
-		MyUtils.openJSP("board/write", request, response);
+		MyUtils.openJSP("글 등록 | 오늘 점심 뭐먹지?","board/write", request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		//String savePath = request.getRealPath("upload"); //저장경로
-		final String path = "C:\\Users\\Administrator\\git\\LunchProject1\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
+		final String path = "C:\\Users\\user\\git\\LunchProject\\LunchProject1\\src\\main\\webapp\\upload"; //저장경로
 		final int sizeLimit = 1024*1024*15; //파일크기
 		
 		MultipartRequest multi = new MultipartRequest(request, path, sizeLimit, "utf-8", new DefaultFileRenamePolicy() /*중복이름 변경*/); 
@@ -91,7 +90,6 @@ public class BoardWriteServlet extends HttpServlet {
 			doGet(request, response);
 			return;
 		}
-		
 		response.sendRedirect("/ojm");
 	}
 

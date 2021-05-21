@@ -1,4 +1,4 @@
-package com.koreait.lunch.my.controller;
+package com.koreait.lunch.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,12 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.koreait.lunch.member.model.MemberVO;
 import com.koreait.lunch.model.DBUtils;
 
-@WebServlet("/findpw")
+@WebServlet("/findPw")
 public class FindPwServelt extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}

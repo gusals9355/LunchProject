@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.koreait.lunch.board.model.BoardDAO;
+import com.koreait.lunch.board.model.BoardVO;
 import com.koreait.lunch.board.reple.model.RepleDAO;
 import com.koreait.lunch.board.reple.model.RepleVO;
 import com.koreait.lunch.controller.MyUtils;
@@ -20,11 +21,12 @@ public class RepleModServlet extends HttpServlet {
 			response.sendRedirect("/ojm/login");
 			return;
 		}
-		request.setAttribute("boards", BoardDAO.getBoard(MyUtils.getParamInt("no", request),MyUtils.getLoginUserID(request)));
+		BoardVO vo = BoardDAO.getBoard(MyUtils.getParamInt("no", request),MyUtils.getLoginUserID(request));
+		request.setAttribute("boards",vo);
 		request.setAttribute("reples", RepleDAO.getReples(MyUtils.getParamInt("no", request)));
 		request.setAttribute("repleNo", request.getParameter("repleNo")); //seta안하면 안넘어가네
 		
-		MyUtils.openJSP("board/reple/modReple", request, response);
+		MyUtils.openJSP(vo.getTitle(),"board/reple/modReple", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

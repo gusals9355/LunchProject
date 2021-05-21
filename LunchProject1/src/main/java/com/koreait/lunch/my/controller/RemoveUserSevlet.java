@@ -11,14 +11,17 @@ import com.koreait.lunch.controller.MyUtils;
 import com.koreait.lunch.member.model.MemberDAO;
 import com.mysql.cj.Session;
 
-@WebServlet("/removeUser")
+@WebServlet("/user/remove_user")
 public class RemoveUserSevlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(MyUtils.getLoginUser(request) == null) {
+			response.sendRedirect("/ojm/login");
+			return;
+		}
 		MemberDAO.removeUser(MyUtils.getLoginUserID(request));
 		MyUtils.logOutSession(request.getSession());
 		response.sendRedirect("/ojm");
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}

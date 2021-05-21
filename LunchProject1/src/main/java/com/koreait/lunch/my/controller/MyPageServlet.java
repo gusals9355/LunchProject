@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.koreait.lunch.controller.MyUtils;
 
-@WebServlet("/mypage")
+@WebServlet("/user/edit")
 public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.openJSP("my/mypage", request, response);
+		if(MyUtils.getLoginUser(request) == null) {
+			response.sendRedirect("/ojm/login");
+			return;
+		}
+		MyUtils.openJSP("오늘 점심 뭐먹지?","my/mypage", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

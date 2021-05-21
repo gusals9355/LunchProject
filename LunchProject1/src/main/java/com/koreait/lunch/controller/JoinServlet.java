@@ -17,8 +17,7 @@ import com.koreait.lunch.member.model.MemberVO;
 @WebServlet("/ojm/join")
 public class JoinServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		MyUtils.openJSP("join", request, response);
+		MyUtils.openJSP("회원가입 | 오늘 점심 뭐먹지?","join", request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

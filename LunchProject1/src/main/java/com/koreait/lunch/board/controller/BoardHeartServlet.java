@@ -13,6 +13,10 @@ import com.koreait.lunch.controller.MyUtils;
 @WebServlet("/board/heart")
 public class BoardHeartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(MyUtils.getLoginUser(request) == null) {
+			response.sendRedirect("/ojm/login");
+			return;
+		}
 		int no = MyUtils.getParamInt("no", request);
 		int fav = MyUtils.getParamInt("fav", request);
 		if(fav==1) {

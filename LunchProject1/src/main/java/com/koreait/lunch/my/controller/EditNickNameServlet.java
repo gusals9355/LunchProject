@@ -13,10 +13,14 @@ import com.koreait.lunch.member.model.MemberDAO;
 import com.koreait.lunch.member.model.MemberVO;
 
 
-@WebServlet("/editNickName")
+@WebServlet("/user/edit/nickname")
 public class EditNickNameServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.openJSP("my/editNickName", request, response);
+		if(MyUtils.getLoginUser(request) == null) {
+			response.sendRedirect("/ojm/login");
+			return;
+		}
+		MyUtils.openJSP("오늘 점심 뭐먹지?","my/editNickName", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

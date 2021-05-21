@@ -1,4 +1,4 @@
-package com.koreait.lunch.my.controller;
+package com.koreait.lunch.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.koreait.lunch.member.model.MemberVO;
 /**
  * Servlet implementation class FindIdServlet
  */
-@WebServlet("/findid")
+@WebServlet("/findId")
 public class FIndIdServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

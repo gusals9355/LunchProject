@@ -128,13 +128,12 @@ public class BoardDAO {
 				vo.setMapY(rs.getDouble("mapY"));
 				vo.setIsFav(rs.getInt("isFav"));
 			}
-			return vo;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return vo;
 		}finally {
 			DBUtils.close(con);
 		}
+		return vo;
 	}
 	
 	public static void delBoard(int boardNo, String id) {

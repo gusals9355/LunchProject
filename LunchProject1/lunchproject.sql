@@ -24,7 +24,7 @@ create table board(
 	category varchar(4) not null,
 	mapX decimal(20,16) not null,
 	mapy double(20,16) not null,
-	foreign key(id) references member(id)
+	foreign key(id) references member(id) on delete cascade
 );
 
 create table favorite(
@@ -42,7 +42,7 @@ create table log(
 	log varchar(10) not null check(log in ('로그인','로그아웃')),
 	reg_dt datetime default now(),
 	attendance boolean default 0,
-	foreign key(id) references member(id)
+	foreign key(id) references member(id) on delete cascade
 );
 
 create table reple(

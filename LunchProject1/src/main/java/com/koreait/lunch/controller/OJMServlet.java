@@ -13,9 +13,8 @@ import com.koreait.lunch.board.model.BoardDAO;
 @WebServlet("/ojm")
 public class OJMServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.getNav(request);
 		request.setAttribute("list", BoardDAO.getAllBoard());
-		MyUtils.openJSP("ojm", request, response);
+		MyUtils.openJSP("오늘 점심은 뭐먹지?","ojm", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

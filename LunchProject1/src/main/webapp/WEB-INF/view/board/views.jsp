@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/boot/bootstrap.css"> -->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<title>${boards.title}</title>
-</head>
-<body>
-<jsp:include page="../nav/${str}" flush="false"/>
 <div class="container">
 	<div class="row layout">
-	
 		<div class="col left_layout"> <!-- 왼쪽 레이아웃 -->
 			<div class="imageBlock"> <!-- 사진블럭 -->
 				<img src="../../../upload/${boards.picture}" onerror="this.src='../../../upload/noImage.gif';" width="550" height="300">
@@ -85,6 +75,3 @@
 		</div>
 	</div>
 </div>
-<script src="/js/common.js"></script>
-</body>
-</html>

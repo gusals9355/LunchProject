@@ -37,6 +37,24 @@ public class MemberDAO {
 		return verify;
 	}
 	
+	public static int getAllPage() {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		final String sql = "select ceil(count(*)/10) from member";
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { 
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+		return 0;
+	}
+	
 	public static String getHashedPw(String id) { //패스워드 확인
 		Connection con = null;
 		con = DBUtils.getCon(con);
@@ -79,14 +97,16 @@ public class MemberDAO {
 		return count;
 	}
 	
-	public static List<MemberVO> getRanking() {
+	public static List<MemberVO> getRanking(int sIdx, int pageCount) {
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		List<MemberVO> list = new ArrayList<MemberVO>();
-		final String sql = "select nickname, ranked, id, point, reg_dt from member order by point desc";
+		final String sql = "select nickname, ranked, id, point, reg_dt from member order by point desc, reg_dt limit ?,?";
 		
 		try {
 			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, sIdx);
+			pstmt.setInt(2, pageCount);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MemberVO vo = new MemberVO();

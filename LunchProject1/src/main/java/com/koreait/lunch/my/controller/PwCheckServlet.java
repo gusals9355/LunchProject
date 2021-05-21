@@ -12,14 +12,22 @@ import org.mindrot.jbcrypt.BCrypt;
 import com.koreait.lunch.controller.MyUtils;
 import com.koreait.lunch.member.model.MemberDAO;
 
-@WebServlet("/user/pwCheck")
+@WebServlet("/user/pw_check")
 public class PwCheckServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.openJSP("my/pwCheck", request, response);
+		if(MyUtils.getLoginUser(request) == null) {
+			response.sendRedirect("/ojm/login");
+			return;
+		}
+		if(MyUtils.getLoginUser(request) == null) {
+			response.sendRedirect("/ojm/login");
+			return;
+		}
+		MyUtils.openJSP("오늘 점심 뭐먹지?","my/pwCheck", request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(BCrypt.checkpw(request.getParameter("pw"), MemberDAO.getHashedPw(request.getParameter("id")))) {
-			response.sendRedirect("/mypage");
+			response.sendRedirect("edit");
 			return;
 		}
 		request.setAttribute("msg", "비밀번호를 다시 확인해주세요.");

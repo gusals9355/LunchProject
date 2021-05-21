@@ -19,7 +19,7 @@
 				<div class="mybox col">
 					<h3>정말 탈퇴하시겠습니까?</h3>
 					<p>탈퇴 시 기존의 정보들이 절대 복구 되지 않습니다.</p>
-					<button type="button" class="btn btn-danger" onclick="againCheck('removeUser','탈퇴')">탈퇴하기</button>
+					<button type="button" class="btn btn-danger" onclick="againCheck('user/remove_user','탈퇴')">탈퇴하기</button>
 				</div>
 			</div>
 		</div>

@@ -24,15 +24,6 @@ public class MyUtils {
 		return parseStringToInt(request.getParameter(s));
 	}
 	
-	public static void getNav(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		if(getLoginUser(request) == null) {
-			session.setAttribute("str", "nav.jsp");
-			return;
-		}
-		session.setAttribute("str", "loginNav.jsp");
-	}
-	
 	public static MemberVO getLoginUser(HttpServletRequest request) {
 		if(request == null) return null;
 		HttpSession hs = request.getSession();
@@ -47,8 +38,13 @@ public class MyUtils {
 		session.invalidate();
 	}
 	
-	public static void openJSP(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/"+jsp +".jsp").forward(request, response);
+	public static void openJSP(String title, String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(getLoginUser(request) == null) request.setAttribute("nav", "nav");
+		else request.setAttribute("nav", "loginNav");
+		
+		request.setAttribute("title", title);
+		request.setAttribute("page", page);
+		request.getRequestDispatcher("/WEB-INF/view/template.jsp").forward(request, response);
 	}
 	
 	public static void reUserInfo(HttpServletRequest request) {

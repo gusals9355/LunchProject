@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.koreait.lunch.board.model.BoardDAO;
+import com.koreait.lunch.board.model.BoardVO;
 import com.koreait.lunch.board.reple.model.RepleDAO;
 import com.koreait.lunch.controller.MyUtils;
 
@@ -21,10 +22,11 @@ public class BoardViewsServlet extends HttpServlet {
 			return;
 		}
 		int no = MyUtils.getParamInt("no", request);
-		request.setAttribute("boards", BoardDAO.getBoard(no,MyUtils.getLoginUserID(request)));
+		BoardVO vo = BoardDAO.getBoard(no,MyUtils.getLoginUserID(request));
+		request.setAttribute("boards", vo);
 		request.setAttribute("reples", RepleDAO.getReples(no));
 		request.setAttribute("selRepleNo", request.getParameter("repleNo"));
-		MyUtils.openJSP("board/views", request, response);
+		MyUtils.openJSP(vo.getTitle(),"board/views", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

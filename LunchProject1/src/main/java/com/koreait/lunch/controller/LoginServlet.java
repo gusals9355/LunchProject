@@ -18,9 +18,11 @@ import com.koreait.lunch.member.model.MemberVO;
 @WebServlet("/ojm/login")
 public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.getNav(request);
-		MyUtils.openJSP("login", request, response);
-		
+		if(MyUtils.getLoginUser(request) != null) { //이미 로그인중일때
+			response.sendRedirect("/ojm");
+			return;
+		}
+		MyUtils.openJSP("로그인 | 오점뭐?","login", request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -40,7 +42,6 @@ public class LoginServlet extends HttpServlet {
 			MemberDAO.log(id,"로그인"); //로그인시 로그들을 db에 저장
 			MemberDAO.logCheck(id); //하루 최초 로그인 시 출석체크가 되는 메소드
 			session.setAttribute("userInfo", MemberDAO.getUserInfo(id));
-			MyUtils.getNav(request);
 			response.sendRedirect("/ojm");
 		}
 	}

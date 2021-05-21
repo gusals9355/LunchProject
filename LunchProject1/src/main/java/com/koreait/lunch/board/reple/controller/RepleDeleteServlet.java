@@ -15,6 +15,10 @@ import com.koreait.lunch.controller.MyUtils;
 public class RepleDeleteServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(MyUtils.getLoginUser(request) == null) {
+			response.sendRedirect("/ojm/login");
+			return;
+		}
 		RepleDAO.delReple(MyUtils.getParamInt("no", request), MyUtils.getLoginUserID(request), MyUtils.getParamInt("repleNo", request));
 		
 		response.sendRedirect("views?no="+MyUtils.getParamInt("no", request));
