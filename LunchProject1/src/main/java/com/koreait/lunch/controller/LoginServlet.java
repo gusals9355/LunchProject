@@ -15,7 +15,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import com.koreait.lunch.member.model.MemberDAO;
 import com.koreait.lunch.member.model.MemberVO;
 
-@WebServlet("/ojm/login")
+@WebServlet("/user/login")
 public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(MyUtils.getLoginUser(request) != null) { //이미 로그인중일때

@@ -12,13 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.koreait.lunch.member.model.MemberDAO;
 import com.koreait.lunch.member.model.MemberVO;
 
-/**
- * Servlet implementation class FindIdServlet
- */
-@WebServlet("/findId")
+@WebServlet("/user/findId")
 public class FIndIdServelt extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		MemberVO memberVo = new MemberVO();
@@ -29,11 +24,10 @@ public class FIndIdServelt extends HttpServlet {
 		List<String> idList = MemberDAO.selectIdList(memberVo);
 		request.setAttribute("idList",idList);
 		// 다시 findid.jsp 가기
-		
+		MyUtils.openJSP("오늘 점심 뭐먹지?", "findId", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
-
 }

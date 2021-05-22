@@ -43,12 +43,12 @@
 		</div>
 	</div>
 </div>
-	<p>
-	<c:forEach var="item" items="${list }">
-		<input type="hidden" name="no" value="${item.no}">
-		<input type="hidden" name="store" value="${item.store}">
-		<input type="hidden" name="mapX" value="${item.mapX}">
-		<input type="hidden" name="mapY" value="${item.mapY}">
-	</c:forEach>
-	</p>
+<p>
+<c:forEach var="item" items="${list }">
+	<input type="hidden" name="no" value="${item.no}">
+	<input type="hidden" name="store" value="${item.store}">
+	<input type="hidden" name="mapX" value="${item.mapX}">
+	<input type="hidden" name="mapY" value="${item.mapY}">
+</c:forEach>
+</p>
 <script src="/js/ojm.js"></script>

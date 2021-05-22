@@ -37,12 +37,14 @@ public class MemberDAO {
 		return verify;
 	}
 	
-	public static int getAllPage() {
+	public static int getAllPage(String select, String id) {
 		Connection con = null;
 		con = DBUtils.getCon(con);
-		final String sql = "select ceil(count(*)/10) from member";
+		final String sql = "select ceil(count(*)/10) from member where "
+				+ select+" like ?";
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+id+"%");
 			rs = pstmt.executeQuery();
 			if(rs.next()) { 
 				return rs.getInt(1);
@@ -97,16 +99,17 @@ public class MemberDAO {
 		return count;
 	}
 	
-	public static List<MemberVO> getRanking(int sIdx, int pageCount) {
+	public static List<MemberVO> getRanking(String select, String id, int sIdx, int pageCount) {
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		List<MemberVO> list = new ArrayList<MemberVO>();
-		final String sql = "select nickname, ranked, id, point, reg_dt from member order by point desc, reg_dt limit ?,?";
+		final String sql = "select nickname, ranked, id, point, reg_dt from member where "+select+" like ? order by point desc, reg_dt limit ?,?";
 		
 		try {
 			pstmt= con.prepareStatement(sql);
-			pstmt.setInt(1, sIdx);
-			pstmt.setInt(2, pageCount);
+			pstmt.setString(1, "%"+id+"%");
+			pstmt.setInt(2, sIdx);
+			pstmt.setInt(3, pageCount);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MemberVO vo = new MemberVO();
@@ -123,6 +126,34 @@ public class MemberDAO {
 			DBUtils.close(con);
 		}
 		return list;
+	}
+	
+	public static MemberVO searchUser(String id) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		MemberVO userInfo = new MemberVO();
+		final String sql = "select * from member where id = ?";
+		
+		try {
+			pstmt= con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				userInfo.setId(rs.getString("id"));
+				userInfo.setRank(rs.getString("ranked"));
+				userInfo.setGender(rs.getString("gender"));
+				userInfo.setName(rs.getString("name"));
+				userInfo.setEmail(rs.getString("email"));
+				userInfo.setNickName(rs.getString("nickname"));
+				userInfo.setPoint(rs.getString("point"));
+				userInfo.setReg_dt(rs.getString("reg_dt"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+		return userInfo;
 	}
 	
 	public static MemberVO getUserInfo(String id) {
@@ -177,25 +208,26 @@ public class MemberDAO {
 		return idList;
 	}
 	
-	public static int updatePassword(MemberVO vo) {
+	public static boolean findPw(MemberVO vo) {
 		Connection con = null;
 		con = DBUtils.getCon(con);
 		
-		final String sql = "update member set pw = ? "+
-					"where name = ? and email = ? and id = ?";
+		final String sql = "select * from member where id=? and name=? and email=?";
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.getPw());
+			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getName());
 			pstmt.setString(3, vo.getEmail());
-			pstmt.setString(4, vo.getId());
-			return pstmt.executeUpdate(); // 정상 실행시 1 반환
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			return 0;
 		}finally {
 			DBUtils.close(con);
 		}
+		return false;
 	}
 	
 	public static void log(String id, String str) { //로그인 정보 (로그)를 저장하는 메소드
@@ -271,6 +303,24 @@ public class MemberDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickname);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+	}
+	
+	public static void editPw(String id, String hashPw) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql = "update member set pw=? where id=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, hashPw);
 			pstmt.setString(2, id);
 			pstmt.executeUpdate();
 		} catch (Exception e) {

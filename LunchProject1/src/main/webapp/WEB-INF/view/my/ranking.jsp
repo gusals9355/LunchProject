@@ -19,6 +19,13 @@
 			가입날짜
 		</div>
 	</div>
+	<div class="row">
+	<div class="col-1" id="count"></div>
+	<div class="col-3" id="nickName"></div>
+	<div class="col-2" id="rank"></div>
+	<div class="col-2" id="point"></div>
+	<div class="col-4" id="reg_dt"></div>
+	</div>
 	<c:forEach var="i" items="${rankingList}" varStatus="status">
 		<div class="row">
 			<div class="mybox col-1">
@@ -38,7 +45,50 @@
 			</div>
 		</div>
 	</c:forEach>
-	<c:forEach var="i" begin="1" end="${maxPage}">
-		&nbsp;<a href="?page=${i}">${i}</a>&nbsp;
-	</c:forEach>
+	<div class="row">
+		<div class="col">
+			<c:forEach var="i" begin="1" end="${maxPage}">
+				&nbsp;<a href="?page=${i}&id=${id}">${i}</a>&nbsp;
+			</c:forEach>
+		</div>
+		<div class="col">
+			<form action="/ranking" method="get">
+				<select name="select">
+					<option value="nickname">닉네임
+					<option value="id">아이디
+				</select>
+				<input type="text" name="id" maxlength="10" value="${id }">
+				<input type="submit" value="검색">
+			</form>
+		</div>
+	</div>
 </div>
+<script>
+/*
+	function search(){
+		var id = document.querySelector('#id').value;
+		var param = {
+			id
+		}
+		ajax(param);
+	}
+	
+	function ajax(param){
+		fetch('/ranking', init)
+		.then(function(res){
+			return res.json();
+		}).then(function(myJson){
+			console.log(myJson);
+			setData(myJson);
+		});
+	}
+	
+	function setData(data){
+		document.querySelector('#count').innerText = 0;
+		document.querySelector('#nickName').innerHTML = data.nickName;
+		document.querySelector('#rank').innerText = data.rank;
+		document.querySelector('#point').innerHTML = data.point;
+		document.querySelector('#reg_dt').innerText = data.reg_dt;
+	}
+	*/
+</script>

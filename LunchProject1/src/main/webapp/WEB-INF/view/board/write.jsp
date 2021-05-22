@@ -11,7 +11,7 @@
 		<div class="col left_layout"> <!-- 왼쪽 레이아웃 -->
 			<div class="search_store"> <!-- 검색블럭 -->
 				<form onsubmit="searchPlaces(); return false;">
-					<label>매장찾기 : <input type="text" id="keyword" size="40"></label> 
+					<label>매장찾기 : <input type="text" id="keyword" size="40" autofocus></label> 
 					<button type="submit" style="display: none;">검색하기</button> 
 					<p id="markerMsg"></p>
 				</form>
@@ -77,7 +77,7 @@
 					</div>
 				</c:if>!-->
 				<div>
-					<input type="text" name="title" value="${param.title}" maxlength="30" placeholder="제목" size="60" autofocus required>
+					<input type="text" name="title" value="${param.title}" maxlength="30" placeholder="제목" size="60" required>
 				</div>
 				<div class="danger-log"> <!-- danger log -->
 					<p><strong>※ 무분별한 게시글은 관리자에 의해 삭제될 수 있습니다.</strong></p>

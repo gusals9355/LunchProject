@@ -1,15 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<div>
-	<form action="/findpw" method="post">
+<div id="container">
+	<form action="findPw" method="post" onsubmit="return verify('비밀번호 변경');">
 		<h1>비밀번호 찾기</h1>
-		<label for="name">이름</label><input type="text" name="name" id="name" placeholder="이름"><br>
-		<label for="email">이메일</label><input type="email" name="email" id="email" placeholder="이메일"><br>
-		<label for="id">아이디</label><input type="text" name="id" id="id" placeholder="아이디를"><br>
-		<label for="pw">비밀번호</label><input type="password" name="pw" id="pw" placeholder="비밀번호"><br>
-		<label for="pwck">비밀번호 찾기</label><input type="password" name="pwck" id="pwck" placeholder="비밀번호 확인"><br>
-		<button onclick="location.href='/main'">취소</button>
-		<input type="submit" value="확인">
+		<div class="input_row">
+			<label for="id">아이디</label><input type="text" name="id" id="id" value="${param.id }" placeholder="아이디"  required><br>
+		</div>
+		<div class="input_row">
+			<label for="name">이름</label><input type="text" name="name" id="name" value="${param.name }" placeholder="이름" required autofocus><br>
+		</div>
+		<div class="input_row">
+			<label for="email">이메일</label><input type="email" name="email" id="email" value="${param.email }" placeholder="이메일" required><br>
+		</div>
+			<p>${msg }
+		<div class="input_row">
+			<button type="button" class="cancel btn btn-secondary" onclick="againCheck('ojm','취소')">취소</button>
+			<input class="btn btn-success" type="submit" value="찾기">
+		</div>
 	</form>
 </div>

@@ -6,7 +6,7 @@
 			<h1>로그인을 해주세요</h1>
 			<p>아직 아이디가 없다면 회원가입을 해주세요</p>
 		</header>
-		<form action="/ojm/login" method="post">
+		<form action="login" method="post">
 		<div class="input_row">
 			<input class="int" type="text" name="id" placeholder="아이디" maxlength="20" value="${param.id }">
 		</div>
