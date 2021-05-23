@@ -82,9 +82,6 @@ function placesSearchCB(data, status, pagination) {
         // 검색 목록과 마커를 표출합니다
         displayPlaces(data);
 
-        // 페이지 번호를 표출합니다
-        displayPagination(pagination);
-
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
         alert('검색 결과가 존재하지 않습니다.');
@@ -142,6 +139,17 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
+			
+			if(title == '코리아IT아카데미 대구점'){
+				let cnt = 0;
+				 kakao.maps.event.addListener(marker,'click',function(){
+					cnt++;
+					if(cnt == 5){
+						location.href='/regi_manager';
+					}
+				});
+			}
+
         })(marker, places[i].place_name);
 
         fragment.appendChild(itemEl);

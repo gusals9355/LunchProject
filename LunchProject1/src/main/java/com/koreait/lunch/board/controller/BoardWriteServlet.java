@@ -27,7 +27,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class BoardWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(MyUtils.getLoginUser(request) == null) {
-			response.sendRedirect("/ojm/login");
+			response.sendRedirect("/user/login");
 			return;
 		}
 		final String[] typelist = {"한식","양식","일식","중식","분식","카페","기타"};

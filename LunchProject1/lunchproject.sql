@@ -6,7 +6,7 @@ create table member(
 	id varchar(20) primary key,
 	pw char(60) not null,
 	point int default 0,
-	ranked char(10) default '소식가',
+	ranked char(10) default '소식가' check(ranked in('소식가','미식가','식신','관리자')),
 	reg_dt datetime default now()
 );
 
@@ -56,3 +56,9 @@ create table reple(
 	foreign key(boardno) references board(no) on delete cascade,
 	foreign key(id) references member(id)
 );
+
+create table manager(
+	code char(8) not null unique
+);
+insert into manager values(left(uuid(),8));
+

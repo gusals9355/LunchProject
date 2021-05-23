@@ -230,6 +230,27 @@ public class MemberDAO {
 		return false;
 	}
 	
+	public static boolean regiManager(String code) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		final String sql = "select code from manager where code = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBUtils.close(con);
+		}
+		return false;
+		
+	}
+	
 	public static void log(String id, String str) { //로그인 정보 (로그)를 저장하는 메소드
 		Connection con = null;
 		con = DBUtils.getCon(con);
@@ -348,6 +369,23 @@ public class MemberDAO {
 			DBUtils.close(con);
 		}
 	}
+	public static void modManager(String id) {
+		Connection con = null;
+		con = DBUtils.getCon(con);
+		
+		final String sql = "update member set ranked='관리자' where id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con);
+		}
+	}
+
+	
 	
 	
 }
