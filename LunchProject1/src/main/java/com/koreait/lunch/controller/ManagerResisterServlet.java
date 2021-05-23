@@ -15,6 +15,7 @@ public class ManagerResisterServlet extends HttpServlet {
 		if(MyUtils.getLoginUser(request) == null) {
 			response.sendRedirect("/user/login");
 			return;
+			//com
 		}
 		MyUtils.openJSP("오늘 점심 뭐먹지?", "register_manager", request, response);
 	}
