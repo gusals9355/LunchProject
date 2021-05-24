@@ -12,13 +12,20 @@
 				<div class="col">
 					<div class="search_store"> <!-- 검색블럭 -->
 						<form onsubmit="searchPlaces(); return false;">
-							<label>매장찾기 : <input type="text" value="코리아it아카데미" id="keyword" size="40"></label> 
+							<label>매장찾기 <input type="text" value="코리아it아카데미" id="keyword" size="40"></label> 
 							<button type="submit" style="display: none;">검색하기</button> 
 						</form>
 					</div>
 				</div>
-				<div class="col">
-					카테고리
+				<div style="display: flex; align-self: center;" class="col category-div dropdown">
+					<button style="width: 120px; height: 40px;" class="btn btn-secondary dropdown-toggle" type="button" id="food" data-bs-toggle="dropdown" aria-expanded="false">
+						<span id="asd">전체</span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="food">
+						<c:forEach var="type" items="${typelist}">
+							<li><button class="dropdown-item" id="${type }" type="button" onclick="setType('${type}')">${type}</button></li>
+						</c:forEach>
+					</ul>
 				</div>
 			</div>
 			<div class="map_wrap"> <!-- 지도블럭 -->
@@ -43,12 +50,13 @@
 		</div>
 	</div>
 </div>
-<p>
 <c:forEach var="item" items="${list }">
 	<input type="hidden" name="no" value="${item.no}">
 	<input type="hidden" name="store" value="${item.store}">
 	<input type="hidden" name="mapX" value="${item.mapX}">
 	<input type="hidden" name="mapY" value="${item.mapY}">
 </c:forEach>
-</p>
+<script>
+	document.querySelector('#')
+</script>
 <script src="/js/ojm.js"></script>

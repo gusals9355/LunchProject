@@ -15,7 +15,6 @@ public class ManagerResisterServlet extends HttpServlet {
 		if(MyUtils.getLoginUser(request) == null) {
 			response.sendRedirect("/user/login");
 			return;
-			//com
 		}
 		MyUtils.openJSP("오늘 점심 뭐먹지?", "register_manager", request, response);
 	}
@@ -23,6 +22,7 @@ public class ManagerResisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(MemberDAO.regiManager(request.getParameter("code"))) { //코드 입력성공
 			MemberDAO.modManager(MyUtils.getLoginUserID(request));
+			MyUtils.reUserInfo(request);
 			response.sendRedirect("/ojm");
 			return;
 		}

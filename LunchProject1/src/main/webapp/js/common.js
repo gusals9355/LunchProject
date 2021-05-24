@@ -10,3 +10,8 @@ function againCheck(page, str) {
 	    return false;
 	}
 }
+
+function setType(type){
+	document.getElementById('asd').innerHTML = type;
+    document.getElementById('foodType').value = type;
+}

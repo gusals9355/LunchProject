@@ -5,7 +5,7 @@
 		<h1>관리자 등록</h1>
 		<p>코드를 입력해주세요.</p>
 	</header>
-	<form action="login" method="post">
+	<form action="regi_manager" method="post">
 	<div class="input_row">
 		<input class="int" type="text" name="code" maxlength="20">
 	</div>

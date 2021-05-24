@@ -227,3 +227,4 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
+

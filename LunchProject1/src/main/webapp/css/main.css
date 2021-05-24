@@ -37,8 +37,8 @@ ol {padding:0 !important;}
 a {text-decoration: none !important; color: black !important;}
 li {list-style-type: none;}
 
-.container {padding-top: 40px;}
-
+html, body, section {height: 100%;}
+body  { font-family: 'NanumBarunGothic', sans-serif; }
 /*login */
 #container{margin: 0 auto; width:768px; display: flex; justify-content: center; padding-top: 50px; padding-bottom: 50px; border: 1px solid #eaeaea;}
 .input_row {width: 400px; height: 50px;}
@@ -52,6 +52,7 @@ li {list-style-type: none;}
 .content-title > h1 {font-size: 19px;}
 .content-title > p {font-size: 13px;}
 .error > p {font-size: 13px; color: red;}
+.submits { display: flex; justify-content: space-around;}
 
 /*join */
 .input_row2 {width: 400px; margin-bottom: 20px;}

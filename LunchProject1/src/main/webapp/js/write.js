@@ -53,10 +53,6 @@ const fileTypes = [
 function validFileType(file) {
 	return fileTypes.includes(file.type);
 }
-function setType(type){
-    document.getElementById('foodType').value = type;
-	document.getElementById('asd').innerHTML = type;
-}
 function setStar(i) {
     document.getElementById('star').value = i;
 	document.getElementById('zxc').innerHTML = "";
