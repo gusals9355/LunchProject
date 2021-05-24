@@ -17,8 +17,8 @@
 			</div>
 		</c:forEach>
 		<div class="submits">
-			<button type="button" class="cancel btn btn-secondary" onclick="againCheck('ojm','취소')">취소</button>
-			<input class="btn btn-success" type="submit" value="찾기" style="width: 114px; height: 36px;">
+			<button type="button" class="cancel btn btn-outline-secondary" onclick="againCheck('ojm','취소')">취소</button>
+			<input class="sub btn btn-outline-success" type="submit" value="찾기">
 		</div>
 	</form>
 </div>

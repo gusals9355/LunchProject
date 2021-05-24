@@ -46,12 +46,12 @@
 		</div>
 	</c:forEach>
 	<div class="row">
-		<div class="col">
+		<div class="under col">
 			<c:forEach var="i" begin="1" end="${maxPage}">
 				&nbsp;<a href="?page=${i}&id=${id}">${i}</a>&nbsp;
 			</c:forEach>
 		</div>
-		<div class="col">
+		<div class="under col">
 			<form action="/ranking" method="get">
 				<select name="select">
 					<option value="nickname">닉네임

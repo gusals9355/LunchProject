@@ -18,7 +18,7 @@ import com.koreait.lunch.controller.MyUtils;
 public class BoardViewsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(MyUtils.getLoginUser(request) == null) {
-			response.sendRedirect("/ojm/login");
+			response.sendRedirect("/user/login");
 			return;
 		}
 		int no = MyUtils.getParamInt("no", request);
@@ -30,8 +30,7 @@ public class BoardViewsServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RepleDAO.insertReple(MyUtils.getParamInt("no", request), MyUtils.getLoginUser(request),
-				request.getParameter("reple"), MyUtils.getParamInt("star", request));
+		RepleDAO.insertReple(MyUtils.getParamInt("no", request), MyUtils.getLoginUser(request),request.getParameter("reple"));
 		
 		doGet(request, response);
 	}

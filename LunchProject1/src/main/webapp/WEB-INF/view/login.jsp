@@ -16,7 +16,6 @@
 		<div class="error">
 			<p>${msg }</p>
 		</div>
-		
 		<div class="input_row">
 			<input class="btn btn-success" type="submit" value="로그인">
 		</div>

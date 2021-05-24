@@ -7,8 +7,6 @@ public class RepleVO {
 	private String nickname;
 	private String reple;
 	private String reg_dt;
-	private int star;
-	
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -45,12 +43,6 @@ public class RepleVO {
 	}
 	public void setReg_dt(String reg_dt) {
 		this.reg_dt = reg_dt;
-	}
-	public int getStar() {
-		return star;
-	}
-	public void setStar(int star) {
-		this.star = star;
 	}
 	
 }

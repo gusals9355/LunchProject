@@ -23,22 +23,17 @@
 		</div>
 		
 		<div class="col right_layout"> <!-- 오른쪽 레이아웃 (주 폼태그) -->
-			<div>
-				${boards.title }
+			<div class="title">
+				<h1>${boards.title }</h1>
 			</div>
-			<div class="danger-log"> <!-- danger log -->
-				<p><strong>danger-log</strong></p>
-			</div>
-			<div>
-				${boards.content }
-				<hr>
+			<div class="content" style="white-space: pre-wrap;">${boards.content }</div>
+			<hr>
 				<c:forEach var="item" items="${reples }">
-					<div>
+					<div style="margin-bottom: 30px;">
 						<c:choose>
 							<c:when test="${item.no == repleNo}">
 								<form action="/board/modReple?no=${param.no }&repleNo=${item.no}" method="post">
 									<input type="text" name="reple" value="${item.reple }">
-									<input type="text" name="star" value="${item.star }" size="1" maxlength="1">
 									<button type="button" class="cancel btn btn-secondary" onclick="goPage('board/views?no=${param.no}')">취소</button>
 									<input type="submit" class="modify btn btn-info" value="수정">
 								</form>

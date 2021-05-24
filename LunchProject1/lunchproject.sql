@@ -52,7 +52,6 @@ create table reple(
 	nickname varchar(10) not null,
 	reple varchar(500) not null,
 	reg_dt datetime default now(),
-	star int(1),
 	foreign key(boardno) references board(no) on delete cascade,
 	foreign key(id) references member(id)
 );

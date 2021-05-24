@@ -34,7 +34,6 @@ public class RepleModServlet extends HttpServlet {
 		RepleVO vo = new RepleVO();
 		vo.setNo(MyUtils.getParamInt("repleNo", request));
 		vo.setReple(request.getParameter("reple"));
-		vo.setStar(MyUtils.getParamInt("star", request));
 		RepleDAO.modReple(no, MyUtils.getLoginUserID(request), vo);
 		response.sendRedirect("views?no="+no);
 	}

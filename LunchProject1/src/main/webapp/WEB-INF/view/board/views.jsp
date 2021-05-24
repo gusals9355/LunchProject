@@ -8,7 +8,7 @@
 	<div class="row layout">
 		<div class="col left_layout"> <!-- 왼쪽 레이아웃 -->
 			<div class="imageBlock"> <!-- 사진블럭 -->
-				<img src="../../../upload/${boards.picture}" onerror="this.src='../../../upload/noImage.gif';" width="550" height="300">
+				<img src="/upload/${boards.picture}" onerror="this.src='../../../upload/noImage.gif';" width="550" height="300">
 				<c:if test="${boards.isFav eq 0 }">
 				<a href="/board/heart?no=${param.no }&fav=1"><i class="bi bi-heart" style="color: red"></i></a>
 				</c:if>
@@ -31,44 +31,47 @@
 			</div>
 		</div>
 		
-		<div class="col right_layout"> <!-- 오른쪽 레이아웃 (주 폼태그) -->
-			<div>
-				${boards.title }
+		<div class="col right_layout" style="position: relative;"> <!-- 오른쪽 레이아웃 (주 폼태그) -->
+			<div class="title">
+				<h1>${boards.title }</h1>
 			</div>
-			<div class="danger-log"> <!-- danger log -->
-				<p><strong>danger-log</strong></p>
-			</div>
-			<div>
-				${boards.content }
-				<hr>
+			<div class="content" style="white-space: pre-wrap;">${boards.content }</div>
+			<hr>
+			<div style="margin-bottom: 30px;">
 				<c:forEach var="item" items="${reples }">
-					<div>
-						${item.nickname } ${item.reple } ${item.star } ${item.reg_dt }
-						<!-- 댓글 삭제 등록-->
+					<div class="repleCmt">
+						<div class="userInfo">
+							<span class="nickname">${item.nickname}</span>
+							<span class="date">(${item.reg_dt})</span>
 						<c:if test="${userInfo.id == item.id }">
-							<button type="button" class="cancel btn btn-secondary" onclick="againCheck('board/delReple?no=${param.no}&repleNo=${item.no}','삭제')">삭제</button>
-							<button type="button" class="modify btn btn-info" onclick="goPage('board/modReple?no=${param.no}&repleNo=${item.no}')">수정</button>
+							<button style="width: 55px; height: 30px;" type="button" class="cancel btn btn-outline-secondary" onclick="againCheck('board/delReple?no=${param.no}&repleNo=${item.no}','삭제')">삭제</button>
+							<button style="width: 55px; height: 30px;" type="button" class="modify btn btn-outline-info" onclick="goPage('board/modReple?no=${param.no}&repleNo=${item.no}')">수정</button>
 						</c:if>
+						</div>
+						<div class="comment">
+							<span class="cmt">${item.reple}</span>
+						</div>
+						<!-- 댓글 삭제 등록-->
 					</div>
 				</c:forEach>
 				
 				<form action="/board/views?no=${param.no }" method="post">
-					<div>
-						<input type="text" name="reple" maxlength="500" size="50">
-						<input type="text" name="star" maxlength="1" size="1">
-						<input type="submit" class="btn btn-success" value="등록" style="width: 50px"></input>
+					<div class="col">
+						<input type="text" name="reple" maxlength="500" placeholder="댓글입력" size="50">
+						<input type="submit" class="btn btn-success" value="등록" style="width: 50px; height: 30px;"></input>
 					</div>
 				</form>
 			</div>
 			
+			
 			<!-- 글 삭제 등록 -->
 			<c:if test="${userInfo.id == boards.id }">
-				<div class="row"> <!-- 하단 블럭 -->
+				<div class="row" style="position: absolute; bottom: 20px; right: 80px; margin-top: 50px"> <!-- 하단 블럭 -->
 					<div class="col"> <!-- 등록 -->
 						<button type="button" class="cancel btn btn-secondary" onclick="againCheck('board/delBoard?no=${param.no}','삭제')">삭제</button>
 					</div>
 					<div class="col">
-						<button type="button" class="modify btn btn-info" onclick="goPage('board/modBoard?no=${param.no}')">수정</button>
+						<button type="button" class="submit btn btn-info" onclick="goPage('board/modBoard?no=${param.no}')">수정</button>
 					</div>
 				</div>
 			</c:if>

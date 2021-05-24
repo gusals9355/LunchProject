@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="row"> 
 		<div class="col"> <!-- 왼쪽 레이아웃 -->
-			평점list
+			좋아요list
 		</div>
 		<div class="col"> <!-- 중간 레이아웃 -->
 			<div class="row">
@@ -18,7 +18,7 @@
 					</div>
 				</div>
 				<div style="display: flex; align-self: center;" class="col category-div dropdown">
-					<button style="width: 120px; height: 40px;" class="btn btn-secondary dropdown-toggle" type="button" id="food" data-bs-toggle="dropdown" aria-expanded="false">
+					<button style="width: 120px; height: 40px;" class="btn btn-outline-secondary dropdown-toggle" type="button" id="food" data-bs-toggle="dropdown" aria-expanded="false">
 						<span id="asd">전체</span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="food">
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div class="col"> <!-- 오른쪽 레이아웃 -->
-			식사추천
+			식사추천 알고리즘
 		</div>
 	</div>
 </div>
@@ -57,6 +57,6 @@
 	<input type="hidden" name="mapY" value="${item.mapY}">
 </c:forEach>
 <script>
-	document.querySelector('#')
+
 </script>
 <script src="/js/ojm.js"></script>
