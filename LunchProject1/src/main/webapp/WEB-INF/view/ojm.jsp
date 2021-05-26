@@ -5,27 +5,20 @@
 <div class="container">
 	<div class="row"> 
 		<div class="col"> <!-- 왼쪽 레이아웃 -->
-			좋아요list
+			평점list
 		</div>
 		<div class="col"> <!-- 중간 레이아웃 -->
 			<div class="row">
 				<div class="col">
 					<div class="search_store"> <!-- 검색블럭 -->
 						<form onsubmit="searchPlaces(); return false;">
-							<label>매장찾기 <input type="text" value="코리아it아카데미" id="keyword" size="40"></label> 
+							<label>매장찾기 : <input type="text" value="코리아it아카데미" id="keyword" size="40"></label> 
 							<button type="submit" style="display: none;">검색하기</button> 
 						</form>
 					</div>
 				</div>
-				<div style="display: flex; align-self: center;" class="col category-div dropdown">
-					<button style="width: 120px; height: 40px;" class="btn btn-outline-secondary dropdown-toggle" type="button" id="food" data-bs-toggle="dropdown" aria-expanded="false">
-						<span id="asd">전체</span>
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="food">
-						<c:forEach var="type" items="${typelist}">
-							<li><button class="dropdown-item" id="${type }" type="button" onclick="setType('${type}')">${type}</button></li>
-						</c:forEach>
-					</ul>
+				<div class="col">
+					카테고리
 				</div>
 			</div>
 			<div class="map_wrap"> <!-- 지도블럭 -->
@@ -46,17 +39,16 @@
 			</div>
 		</div>
 		<div class="col"> <!-- 오른쪽 레이아웃 -->
-			식사추천 알고리즘
+			식사추천
 		</div>
 	</div>
 </div>
+<p>
 <c:forEach var="item" items="${list }">
 	<input type="hidden" name="no" value="${item.no}">
 	<input type="hidden" name="store" value="${item.store}">
 	<input type="hidden" name="mapX" value="${item.mapX}">
 	<input type="hidden" name="mapY" value="${item.mapY}">
 </c:forEach>
-<script>
-
-</script>
+</p>
 <script src="/js/ojm.js"></script>
